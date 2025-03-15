@@ -9,6 +9,7 @@ import Reviews from "./components/reviews";
 import Footer from "./components/Footer";
 import AboutUs from "./pages/AboutUs"; // Import AboutUs Page
 import Projects from "./pages/Projects"; // Import Projects Page
+import LoginPage from "./pages/LoginPage";
 import "./App.css";
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <Route path="/projects" element={<Projects />} />
         {/* About Us Page */}
         <Route path="/about" element={<AboutUs />} />
+        <Route path="/login" element={<LoginPage/>}/>
       </Routes>
       <Footer />
     </Router>
