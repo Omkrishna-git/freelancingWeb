@@ -7,8 +7,8 @@ import Freelancers from "./components/freelancers";
 import TopCust from "./components/topCust";
 import Reviews from "./components/reviews";
 import Footer from "./components/Footer";
-import AboutUs from "./pages/AboutUs"; // Import AboutUs Page
-import Projects from "./pages/Projects"; // Import Projects Page
+import AboutUs from "./pages/AboutUs"; 
+import Projects from "./pages/Projects"; 
 import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/Blog";
 import "./App.css";
