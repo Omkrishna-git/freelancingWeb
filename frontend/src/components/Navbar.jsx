@@ -34,7 +34,6 @@ const Navbar = () => {
 
       {/* Toggle Switch & Login Button */}
       <div className="flex items-center space-x-4">
-        {/* Toggle Switch */}
         <Switch
           checked={enabled}
           onChange={setEnabled}
@@ -50,7 +49,7 @@ const Navbar = () => {
         </Switch>
 
         {/* Login Button */}
-        <button className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600" onClick={() => navigate("/login")} >
+        <button className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600"   onClick={() => navigate("/login")}>
           Login
         </button>
       </div>
