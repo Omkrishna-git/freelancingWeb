@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import AboutUs from "./pages/AboutUs"; 
 import Projects from "./pages/Projects"; 
 import LoginPage from "./pages/LoginPage";
+import BlogPage from "./pages/Blog";
 import "./App.css";
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         {/* About Us Page */}
         <Route path="/about" element={<AboutUs />} />
         <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/blog" element={<BlogPage/>}/>
       </Routes>
       <Footer />
     </Router>
