@@ -1,6 +1,6 @@
 import React from "react";
-import leftImage from "../assets/image-left.png"; // Adjust path based on your folder structure
-import rightImage from "../assets/image-right.png"; // Adjust path based on your folder structure
+import leftImage from "../assets/image-left.png"; 
+import rightImage from "../assets/image-right.png"; 
 
 const Hero = () => {
   return (
