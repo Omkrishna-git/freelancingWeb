@@ -23,17 +23,10 @@ const Navbar = () => {
         <li>
           <Link to="/about" className="cursor-pointer hover:text-gray-600">About Us</Link>
         </li>
-        <li>
-          <Link to="/blogs" className="cursor-pointer hover:text-gray-600">Blogs</Link>
-        </li>
-        <li>
-          <Link to="/features" className="cursor-pointer hover:text-gray-600">Features</Link>
-        </li>
       </ul>
 
       {/* Toggle Switch & Login Button */}
       <div className="flex items-center space-x-4">
-        {/* Toggle Switch */}
         <Switch
           checked={enabled}
           onChange={setEnabled}
@@ -48,10 +41,12 @@ const Navbar = () => {
           />
         </Switch>
 
-        {/* Login Button */}
-        <button className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600">
-          Login
-        </button>
+        {/* Login Button with Link */}
+        <Link to="/login">
+          <button className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600">
+            Login
+          </button>
+        </Link>
       </div>
     </nav>
   );
