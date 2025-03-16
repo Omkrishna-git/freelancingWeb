@@ -1,11 +1,10 @@
 import React from 'react';
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import clientIcon from "../assets/icons8-company-80.png";
 import freelancerIcon from "../assets/icons8-freelancer-64.png";
 const LoginPage = () => {
     const [selectedRole, setSelectedRole] = useState(null);
-    const navigate = useNavigate();
+    
   
     return (
       <div className="min-h-screen flex flex-col justify-between">
