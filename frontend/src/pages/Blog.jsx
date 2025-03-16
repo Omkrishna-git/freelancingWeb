@@ -1,48 +1,50 @@
 import React from "react";
 import { FaSearch, FaPlus } from "react-icons/fa";
-
+import image1 from "../assets/image 28.png";
+import image2 from "../assets/image 29.png";
+import image3 from "../assets/image 32.png";
 const blogs = [
   {
     id: 1,
     category: "Graphics & design guides",
     title: "The Ultimate Guide to Logo Redesign",
     description: "Learn about when you should consider a logo redesign.",
-    image:"../assets/image 28.png"
+    image: image1
   },
   {
     id: 2,
     category: "Video & animation guides",
     title: "How to build a social media video marketing",
     description: "You need scriptwriters, video editors, and quality equipment.",
-    image:"../assets/image 28.png"
+    image:image2
   },
   {
     id: 3,
     category: "Digital marketing guides",
     title: "10 Ways to Make Money on Snapchat",
     description: "Learn proven methods for monetizing your Snapchat presence.",
-    image:"../assets/image 28.png"
+    image:image3
   },
   {
     id: 4,
     category: "Graphics & design guides",
     title: "The Ultimate Guide to Logo Redesign",
     description: "Learn about when you should consider a logo redesign.",
-    image:"../assets/image 32.png"
+    image:image1
   },
   {
     id: 5,
     category: "Video & animation guides",
     title: "How to build a social media video marketing",
     description: "You need scriptwriters, video editors, and quality equipment.",
-    image:"../assets/image 29.png"
+    image:image2
   },
   {
     id: 6,
     category: "Digital marketing guides",
     title: "10 Ways to Make Money on Snapchat",
     description: "Learn proven methods for monetizing your Snapchat presence.",
-    image:"../assets/image 32.png"
+    image: image3
   },
 ];
 
