@@ -7,9 +7,11 @@ import Freelancers from "./components/freelancers";
 import TopCust from "./components/topCust";
 import Reviews from "./components/reviews";
 import Footer from "./components/Footer";
-import AboutUs from "./pages/AboutUs"; // Import AboutUs Page
-import Projects from "./pages/Projects"; // Import Projects Page
+import AboutUs from "./pages/AboutUs"; 
+import Projects from "./pages/Projects"; 
 import LoginPage from "./pages/LoginPage";
+import BlogPage from "./pages/Blog";
+import CompanyRegistration from "./pages/CompanyRegistration"; // ✅ Import this
 import "./App.css";
 
 function App() {
@@ -30,11 +32,12 @@ function App() {
             </>
           }
         />
-        {/* Projects Page */}
+        {/* Other Pages */}
         <Route path="/projects" element={<Projects />} />
-        {/* About Us Page */}
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/company-registration" element={<CompanyRegistration />} /> 
       </Routes>
       <Footer />
     </Router>

@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Switch } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [enabled, setEnabled] = React.useState(false);
-
+  const navigate = useNavigate();
   return (
     <nav className="flex items-center justify-between px-6 py-3 bg-green-100 shadow-md">
       {/* Logo */}
@@ -24,7 +25,7 @@ const Navbar = () => {
           <Link to="/about" className="cursor-pointer hover:text-gray-600">About Us</Link>
         </li>
         <li>
-          <Link to="/blogs" className="cursor-pointer hover:text-gray-600">Blogs</Link>
+          <Link to="/blog" className="cursor-pointer hover:text-gray-600">Blogs</Link>
         </li>
         <li>
           <Link to="/features" className="cursor-pointer hover:text-gray-600">Features</Link>
@@ -33,7 +34,6 @@ const Navbar = () => {
 
       {/* Toggle Switch & Login Button */}
       <div className="flex items-center space-x-4">
-        {/* Toggle Switch */}
         <Switch
           checked={enabled}
           onChange={setEnabled}
@@ -49,7 +49,7 @@ const Navbar = () => {
         </Switch>
 
         {/* Login Button */}
-        <button className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600">
+        <button className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600"   onClick={() => navigate("/login")}>
           Login
         </button>
       </div>

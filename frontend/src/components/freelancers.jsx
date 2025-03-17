@@ -1,13 +1,13 @@
 import React from "react";
-import DemoImage from "../assets/demo.png"; // Import image properly
-
+import DemoImage from "../assets/demo.png"; 
+ 
 const freelancers = [
   {
     name: "Gabriel Courtemanche",
     title: "SEO and digital marketing Expert. Google Certified PPC Consultant",
     expertise: ["Node JS", "Node JS", "Node JS", "Node JS", "Node JS"],
     company: "Google",
-    img: DemoImage, // Use imported image
+    img: DemoImage,
   },
   {
     name: "Justin Michela",
