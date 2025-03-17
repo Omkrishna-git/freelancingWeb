@@ -11,6 +11,7 @@ import AboutUs from "./pages/AboutUs";
 import Projects from "./pages/Projects"; 
 import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/Blog";
+import CompanyRegistration from "./pages/CompanyRegistration"; // ✅ Import this
 import "./App.css";
 
 function App() {
@@ -31,12 +32,12 @@ function App() {
             </>
           }
         />
-        {/* Projects Page */}
+        {/* Other Pages */}
         <Route path="/projects" element={<Projects />} />
-        {/* About Us Page */}
         <Route path="/about" element={<AboutUs />} />
-        <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/blog" element={<BlogPage/>}/>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/company-registration" element={<CompanyRegistration />} /> 
       </Routes>
       <Footer />
     </Router>
