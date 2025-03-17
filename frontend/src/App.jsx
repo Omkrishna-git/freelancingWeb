@@ -11,6 +11,7 @@ import AboutUs from "./pages/AboutUs";
 import Projects from "./pages/Projects"; 
 import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/Blog";
+import WriteBlog from "./pages/WriteBlog"
 import "./App.css";
 
 function App() {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/about" element={<AboutUs />} />
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/blog" element={<BlogPage/>}/>
+        <Route path="/write-blog" element={<WriteBlog/>}/>
       </Routes>
       <Footer />
     </Router>
