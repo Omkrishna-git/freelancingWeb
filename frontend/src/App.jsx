@@ -13,6 +13,9 @@ import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/Blog";
 import CompanyRegistration from "./pages/CompanyRegistration"; // ✅ Import this
 import "./App.css";
+import FreelancerRegistration from "./pages/FreelancerRegistration";
+import FreelancerRegistration01 from "./pages/FreelancerRegistration01";
+import FreelancerRegistration02 from "./pages/FreelancerRegistration02";
 
 function App() {
   return (
@@ -38,6 +41,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/company-registration" element={<CompanyRegistration />} /> 
+        <Route path="/freelancer-registration" element={<FreelancerRegistration />} /> 
+        <Route path="/freelancer-personal-details" element={<FreelancerRegistration01 />} />
+        <Route path="/freelancer-skills" element={<FreelancerRegistration02 />} /> 
       </Routes>
       <Footer />
     </Router>
