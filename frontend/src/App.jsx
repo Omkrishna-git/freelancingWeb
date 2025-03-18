@@ -20,10 +20,12 @@ import "./App.css";
 import FreelancerRegistration from "./pages/FreelancerRegistration";
 import FreelancerRegistration01 from "./pages/FreelancerRegistration01";
 import FreelancerRegistration02 from "./pages/FreelancerRegistration02";
+import FreeLancerDashboard from "./pages/FreelancerDashboard";
 
 function App() {
   return (
     <Router>
+     
       <Navbar />
       <Routes>
         {/* Home Page */}
@@ -54,6 +56,7 @@ function App() {
         <Route path="/freelancer-registration" element={<FreelancerRegistration />} /> 
         <Route path="/freelancer-personal-details" element={<FreelancerRegistration01 />} />
         <Route path="/freelancer-skills" element={<FreelancerRegistration02 />} /> 
+        <Route path="/freelancer" element={<FreeLancerDashboard />} /> 
       </Routes>
       <Footer />
     </Router>
