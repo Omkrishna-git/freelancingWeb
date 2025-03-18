@@ -88,7 +88,7 @@ const Projects = () => {
         {/* Filter Dropdown */}
         <div className="relative flex flex-col sm:flex-row sm:items-center">
           <span className="text-lg font-semibold mr-4 text-gray-700">
-            🎨 Filter Projects:
+            Filter Projects:
           </span>
           <div className="relative">
             <select
@@ -111,7 +111,7 @@ const Projects = () => {
         {/* Sorting Dropdown */}
         <div className="relative flex flex-col sm:flex-row sm:items-center">
           <span className="text-lg font-semibold mr-4 text-gray-700">
-            📊 Sort Projects:
+             Sort Projects:
           </span>
           <div className="relative">
             <select
