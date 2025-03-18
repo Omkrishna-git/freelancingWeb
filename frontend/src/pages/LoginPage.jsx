@@ -40,7 +40,7 @@ const LoginPage = () => {
       </div>
 
       {/* Buttons */}
-      <div className="flex flex-col items-center mt-2">
+      <div className="flex flex-col items-center mt-10">
         <button className="bg-green-400 text-white px-6 py-2 rounded-md font-bold">
           Create Account
         </button>

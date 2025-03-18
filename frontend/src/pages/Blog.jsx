@@ -89,12 +89,15 @@ const BlogsPage = () => {
       <div className="grid md:grid-cols-3 gap-6 mt-6">
         {filteredBlogs.length > 0 ? (
           filteredBlogs.map((blog) => (
+            
             <div key={blog.id} className="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl transition-transform transform hover:scale-105">
               {/* Blog Image */}
               <img src={blog.image} alt={blog.title} className="w-full h-48 object-cover rounded-lg" />
 
               {/* Blog Title */}
-              <h2 className="mt-4 text-lg font-semibold text-gray-900">{blog.title}</h2>
+              <Link to={`/blog/${blog.id}`} className="block">
+                <h2 className="mt-4 text-lg font-semibold text-gray-900">{blog.title}</h2>
+              </Link>
 
               {/* Blog Category */}
               <p className="text-blue-600 text-sm font-semibold mt-2">{blog.category}</p>
