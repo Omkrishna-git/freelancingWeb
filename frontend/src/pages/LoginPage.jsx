@@ -12,6 +12,10 @@ const LoginPage = () => {
     if (role === "client") {
       navigate("/company-registration");
     }
+    if(role === "freelancer")
+    {
+      navigate("/freelancer-registration")
+    }
   };
 
   return (

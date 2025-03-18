@@ -17,6 +17,9 @@ import BlogDetailsPage from "./pages/display-blog";
 import AdminDashboard from "./pages/AdminDashboard";
 
 import "./App.css";
+import FreelancerRegistration from "./pages/FreelancerRegistration";
+import FreelancerRegistration01 from "./pages/FreelancerRegistration01";
+import FreelancerRegistration02 from "./pages/FreelancerRegistration02";
 
 function App() {
   return (
@@ -45,6 +48,12 @@ function App() {
         <Route path="/company-registration" element={<CompanyRegistration />} />
         <Route path="/blog/:id" element={<BlogDetailsPage />}/>
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/company-registration" element={<CompanyRegistration />} /> 
+        <Route path="/freelancer-registration" element={<FreelancerRegistration />} /> 
+        <Route path="/freelancer-personal-details" element={<FreelancerRegistration01 />} />
+        <Route path="/freelancer-skills" element={<FreelancerRegistration02 />} /> 
       </Routes>
       <Footer />
     </Router>
