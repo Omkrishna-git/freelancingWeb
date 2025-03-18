@@ -11,9 +11,11 @@ import AboutUs from "./pages/AboutUs";
 import Projects from "./pages/Projects"; 
 import LoginPage from "./pages/LoginPage";
 import BlogPage from "./pages/Blog";
-import CompanyRegistration from "./pages/CompanyRegistration"; // ✅ Import this
+import CompanyRegistration from "./pages/CompanyRegistration"; 
 import WriteBlog from "./pages/WriteBlog"
 import BlogDetailsPage from "./pages/display-blog";
+import AdminDashboard from "./pages/AdminDashboard";
+
 import "./App.css";
 
 function App() {
@@ -42,6 +44,7 @@ function App() {
         <Route path="/write-blog" element={<WriteBlog/>}/>
         <Route path="/company-registration" element={<CompanyRegistration />} />
         <Route path="/blog/:id" element={<BlogDetailsPage />}/>
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
       <Footer />
     </Router>
