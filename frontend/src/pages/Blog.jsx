@@ -86,7 +86,7 @@ const BlogsPage = () => {
       </div>
 
       {/* Blog Grid */}
-      <div className="grid md:grid-cols-3 gap-6 mt-6">
+      <div className="grid md:grid-cols-3 gap-10 mt-6">
         {filteredBlogs.length > 0 ? (
           filteredBlogs.map((blog) => (
             <Link to={`/blog/${blog.id}`} className="bg-white ">

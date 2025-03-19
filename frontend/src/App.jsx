@@ -17,10 +17,15 @@ import BlogDetailsPage from "./pages/display-blog";
 import AdminDashboard from "./pages/AdminDashboard";
 import ProjectsAndPayments from "./pages/Project&Payment.jsx";
 import "./App.css";
+import FreelancerRegistration from "./pages/FreelancerRegistration";
+import FreelancerRegistration01 from "./pages/FreelancerRegistration01";
+import FreelancerRegistration02 from "./pages/FreelancerRegistration02";
+import FreeLancerDashboard from "./pages/FreelancerDashboard";
 
 function App() {
   return (
     <Router>
+     
       <Navbar />
       <Routes>
         {/* Home Page */}
@@ -45,7 +50,17 @@ function App() {
         <Route path="/company-registration" element={<CompanyRegistration />} />
         <Route path="/blog/:id" element={<BlogDetailsPage />}/>
         <Route path="/admin" element={<AdminDashboard />} />
+<<<<<<< HEAD
         <Route path="/admin/projects" element={<ProjectsAndPayments />} />
+=======
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/company-registration" element={<CompanyRegistration />} /> 
+        <Route path="/freelancer-registration" element={<FreelancerRegistration />} /> 
+        <Route path="/freelancer-personal-details" element={<FreelancerRegistration01 />} />
+        <Route path="/freelancer-skills" element={<FreelancerRegistration02 />} /> 
+        <Route path="/freelancer" element={<FreeLancerDashboard />} /> 
+>>>>>>> 46c86f6f022e5bbc9fd9714071921cd394b2c373
       </Routes>
       <Footer />
     </Router>
