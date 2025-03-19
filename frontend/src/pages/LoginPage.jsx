@@ -12,6 +12,10 @@ const LoginPage = () => {
     if (role === "client") {
       navigate("/company-registration");
     }
+    if(role === "freelancer")
+    {
+      navigate("/freelancer-registration")
+    }
   };
 
   return (
@@ -40,7 +44,7 @@ const LoginPage = () => {
       </div>
 
       {/* Buttons */}
-      <div className="flex flex-col items-center mt-2">
+      <div className="flex flex-col items-center mt-10">
         <button className="bg-green-400 text-white px-6 py-1 rounded-md font-bold">
           Create Account
         </button>
