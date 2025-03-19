@@ -15,7 +15,7 @@ import CompanyRegistration from "./pages/CompanyRegistration";
 import WriteBlog from "./pages/WriteBlog"
 import BlogDetailsPage from "./pages/display-blog";
 import AdminDashboard from "./pages/AdminDashboard";
-
+import ProjectsAndPayments from "./pages/Project&Payment.jsx";
 import "./App.css";
 
 function App() {
@@ -45,6 +45,7 @@ function App() {
         <Route path="/company-registration" element={<CompanyRegistration />} />
         <Route path="/blog/:id" element={<BlogDetailsPage />}/>
         <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/projects" element={<ProjectsAndPayments />} />
       </Routes>
       <Footer />
     </Router>

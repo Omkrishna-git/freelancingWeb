@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 
 import { useParams, Link } from 'react-router-dom';
-import DemoImage from '../assets/BBC.png'; // Default thumbnail
+import image1 from "../assets/image 28.png";
+import image2 from "../assets/image 29.png";
+import image3 from "../assets/image 32.png";
 
 const blogData = [
   {
@@ -10,7 +12,7 @@ const blogData = [
     author: 'John Doe',
     category: 'Graphics & design guides',
     date: 'March 16, 2025',
-    thumbnail: DemoImage,
+    thumbnail: image1,
     content:
       'Learn about when you should consider a logo redesign. The importance of branding, visual identity, and market perception are discussed in this comprehensive guide.',
     attachedFiles: ['sample-file.pdf', 'design-template.zip'],
@@ -21,7 +23,7 @@ const blogData = [
     author: 'Jane Smith',
     category: 'Video & animation guides',
     date: 'February 12, 2025',
-    thumbnail: DemoImage,
+    thumbnail: image2,
     content:
       'You need scriptwriters, video editors, and quality equipment to create engaging video content. Learn the strategies that can help boost your video marketing.',
     attachedFiles: ['marketing-guide.pdf'],
@@ -32,7 +34,7 @@ const blogData = [
     author: 'Jane Doe',
     category: 'Digital marketing guides',
     date: 'March 10, 2025',
-    thumbnail: DemoImage,
+    thumbnail: image3,
     content:
       'Learn proven methods for monetizing your Snapchat presence and maximizing engagement.',
     attachedFiles: ['snapchat-strategy.pdf'],
@@ -66,13 +68,13 @@ const BlogDetailsPage = () => {
 
   return (
     <div className='px-6 py-10'>
-      <div className='max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md'>
+      <div className='max-w-8xl mx-auto bg-white p-6 rounded-lg shadow-md r'>
         <Link to='/blog' className='text-blue-500 hover:underline'>Back to Blogs</Link>
-        <img
+        {/* <img
           src={blog.thumbnail}
           alt={blog.title}
-          className='w-full h-60 object-cover rounded-md mt-4'
-        />
+          className='w-1/2 h-1/4 object-cover rounded-md mt-4  mx-auto'
+        /> */}
         <h1 className='text-3xl font-bold mt-4'>{blog.title}</h1>
         <p className='text-gray-600 mt-2'>
           By {blog.author} | {blog.category} | {blog.date}

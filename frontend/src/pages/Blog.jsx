@@ -25,10 +25,10 @@ const BlogsPage = () => {
     .sort((a, b) => sortOption === "az" ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title));
 
   return (
-    <div className="px-6 py-1">
+    <div className="px-6 py-1 mb-10">
       {/* Header */}
       <div className="relative text-center">
-        <h1 className="text-3xl font-bold text-green-900">BLOGS</h1>
+        <h1 className="text-3xl font-bold text-green-900 mt-5">BLOGS</h1>
         <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
           Everything you need to know to grow your business. Practical online resources covering digital marketing, video animation, writing, copywriting, programming, and design!
         </p>
@@ -43,7 +43,7 @@ const BlogsPage = () => {
       </div>
 
       {/* Search, Filter & Sort */}
-      <div className="flex flex-col sm:flex-row justify-center items-center mt-6 gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
         {/* Search Input */}
         <div className="relative w-full sm:w-1/3">
           <input
@@ -89,15 +89,15 @@ const BlogsPage = () => {
       <div className="grid md:grid-cols-3 gap-6 mt-6">
         {filteredBlogs.length > 0 ? (
           filteredBlogs.map((blog) => (
-            
+            <Link to={`/blog/${blog.id}`} className="bg-white ">
             <div key={blog.id} className="bg-white shadow-lg rounded-lg p-4 hover:shadow-xl transition-transform transform hover:scale-105">
               {/* Blog Image */}
               <img src={blog.image} alt={blog.title} className="w-full h-48 object-cover rounded-lg" />
 
               {/* Blog Title */}
-              <Link to={`/blog/${blog.id}`} className="block">
+              
                 <h2 className="mt-4 text-lg font-semibold text-gray-900">{blog.title}</h2>
-              </Link>
+              
 
               {/* Blog Category */}
               <p className="text-blue-600 text-sm font-semibold mt-2">{blog.category}</p>
@@ -129,6 +129,7 @@ const BlogsPage = () => {
               </div>
             </div>
             </div>
+            </Link>
           ))
         ) : (
           <p className="text-gray-600 text-center col-span-3">No blogs found</p>

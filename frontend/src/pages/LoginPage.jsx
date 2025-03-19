@@ -15,9 +15,10 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col ">
+      <div className="mt-10 text-2xl max-w-2xl mx-auto">Join as a client or freelancer</div>
       {/* Role Selection */}
-      <div className="flex justify-center space-x-6 mt-10">
+      <div className="flex justify-center space-x-6 mt-5">
         <div
           className={`border p-6 rounded-lg cursor-pointer ${
             selectedRole === "client" ? "border-green-500" : "border-gray-300"

@@ -20,12 +20,12 @@ const AdminDashboard = () => {
       <aside className='w-64 bg-gray-800 text-white p-4 shadow-md'>
         <h2 className='text-2xl font-bold mb-6'>Admin Dashboard</h2>
         <ul className='space-y-4'>
-          <li><Link to='/dashboard/home' className='block py-2 px-4 rounded hover:bg-green-700'>Home</Link></li>
-          <li><Link to='/dashboard/projects' className='block py-2 px-4 rounded hover:bg-green-700'>Projects & Payments</Link></li>
-          <li><Link to='/dashboard/freelancers' className='block py-2 px-4 rounded hover:bg-green-700'>Freelancers</Link></li>
-          <li><Link to='/dashboard/companies' className='block py-2 px-4 rounded hover:bg-green-700'>Companies</Link></li>
-          <li><Link to='/dashboard/disputes' className='block py-2 px-4 rounded hover:bg-green-700'>Dispute & Refunds</Link></li>
-          <li><Link to='/dashboard/reports' className='block py-2 px-4 rounded hover:bg-green-700'>Reports & Analytics</Link></li>
+          <li><Link to='/admin' className='block py-2 px-4 rounded hover:bg-green-700'>Home</Link></li>
+          <li><Link to='/admin/projects' className='block py-2 px-4 rounded hover:bg-green-700'>Projects & Payments</Link></li>
+          <li><Link to='/admin/freelancers' className='block py-2 px-4 rounded hover:bg-green-700'>Freelancers</Link></li>
+          <li><Link to='/admin/companies' className='block py-2 px-4 rounded hover:bg-green-700'>Companies</Link></li>
+          <li><Link to='/admin/disputes' className='block py-2 px-4 rounded hover:bg-green-700'>Dispute & Refunds</Link></li>
+          <li><Link to='/admin/reports' className='block py-2 px-4 rounded hover:bg-green-700'>Reports & Analytics</Link></li>
         </ul>
       </aside>
 
