@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";  // Default Navbar (Before Login)
-import NavbarLoggedIn from "./components/NavbarLoggedIn";  // Navbar After Login
+
 import Hero from "./components/Hero";
 import Featured from "./components/Featured";
 import Freelancers from "./components/freelancers";
@@ -48,8 +48,7 @@ function App() {
 
   return (
     <Router>
-      {/* Conditionally render Navbar based on login state */}
-      {isLoggedIn ? <NavbarLoggedIn onLogout={handleLogout} /> : <Navbar />}
+       <Navbar />
 
       <Routes>
         {/* Home Page */}

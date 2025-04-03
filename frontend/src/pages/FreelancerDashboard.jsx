@@ -2,7 +2,7 @@ import React from "react";
 import { Pie } from "react-chartjs-2";
 import "chart.js/auto";
 import Hero from "../components/Hero";
-import Navbar from "../components/NavbarLoggedIn" // Import Hero Section
+ // Import Hero Section
 
 const FreelancerDetails = () => {
   return (
