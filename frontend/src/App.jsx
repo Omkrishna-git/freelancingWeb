@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";  // Default Navbar (Before Login)
+
 import Hero from "./components/Hero";
 import Featured from "./components/Featured";
 import Freelancers from "./components/freelancers";
@@ -23,12 +24,30 @@ import Step3 from "./pages/Step3";
 import Login from "./components/login";
 import {RegistrationProvider} from "./pages/RegistrationContext"; // Adjust the import path as necessary  
 
+import "./App.css";
+
 function App() {
+  // Authentication state (use localStorage to persist login state)
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check if user is logged in when app loads
+  useEffect(() => {
+    const storedLoginStatus = localStorage.getItem("isLoggedIn");
+    if (storedLoginStatus === "true") {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  // Function to handle login/logout (example)
+ 
+  
+
   return (
     <RegistrationProvider>
     <Router>
-     
-      <Navbar />
+      {/* Conditionally render Navbar based on login state */}
+       <Navbar />
+
       <Routes>
   <Route path="/" element={<><Hero /><Featured /><Freelancers /><TopCust /><Reviews /></>} />
   <Route path="/projects" element={<Projects />} />
