@@ -2,36 +2,38 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { useRegistration } from "../pages/RegistrationContext";
 
-const FreelancerRegistration = () => {
+const Step2 = () => {
   const navigate = useNavigate();
+  const { registrationData, setRegistrationData } = useRegistration();
   const [formData, setFormData] = useState({
-    fullname: "",
-    email: "",
-    mobile: "",
-    gender: "",
-    dob: null,
-    location: "",
+    fullName: registrationData.fullName || "",
+    email: registrationData.email || "",
+    phone: registrationData.phone || "",
+    gender: registrationData.gender || "",
+    dob: registrationData.dob || null,
+    address: registrationData.address || "",
   });
 
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     let newErrors = {};
-    if (!formData.fullname) newErrors.fullname = "Full name is required";
+    if (!formData.fullName) newErrors.fullName = "Full name is required";
     if (!formData.email) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Invalid email format";
     }
-    if (!formData.mobile) {
-      newErrors.mobile = "Mobile number is required";
-    } else if (!/^\d{10}$/.test(formData.mobile)) {
-      newErrors.mobile = "Mobile number must be 10 digits";
+    if (!formData.phone) {
+      newErrors.phone = "Mobile number is required";
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      newErrors.phone = "Mobile number must be 10 digits";
     }
     if (!formData.gender) newErrors.gender = "Please select gender";
     if (!formData.dob) newErrors.dob = "Please select your birth date";
-    if (!formData.location) newErrors.location = "Location is required";
+    if (!formData.address) newErrors.address = "Location is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -46,10 +48,10 @@ const FreelancerRegistration = () => {
 
   const handleNext = () => {
     if (validate()) {
-      navigate("/freelancer-skills");
+      setRegistrationData({ ...registrationData, ...formData });
+      navigate("/freelancer-skills", { state: { formData } }); // Pass updated data to Step3
     }
   };
-
   const handleBack = () => {
     navigate("/freelancer-registration");
   }
@@ -65,13 +67,13 @@ const FreelancerRegistration = () => {
             <label className="font-semibold block">Fullname</label>
             <input
               type="text"
-              name="fullname"
-              value={formData.fullname}
+              name="fullName"
+              value={formData.fullName}
               onChange={handleChange}
               placeholder="Your Name"
               className="w-full p-2 border rounded-md focus:ring focus:ring-green-300"
             />
-            {errors.fullname && <p className="text-red-500 text-sm">{errors.fullname}</p>}
+            {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
           </div>
 
           <div>
@@ -91,13 +93,13 @@ const FreelancerRegistration = () => {
             <label className="font-semibold block">Mobile No</label>
             <input
               type="tel"
-              name="mobile"
-              value={formData.mobile}
+              name="phone"
+              value={formData.phone}
               onChange={handleChange}
               placeholder="Your Mobile No"
               className="w-full p-2 border rounded-md focus:ring focus:ring-green-300"
             />
-            {errors.mobile && <p className="text-red-500 text-sm">{errors.mobile}</p>}
+            {errors.phone && <p className="text-red-500 text-sm">{errors.phone}</p>}
           </div>
 
           <div>
@@ -135,13 +137,13 @@ const FreelancerRegistration = () => {
             <label className="font-semibold block">Location</label>
             <input
               type="text"
-              name="location"
-              value={formData.location}
+              name="address"
+              value={formData.address}
               onChange={handleChange}
               placeholder="Your Location"
               className="w-full p-2 border rounded-md focus:ring focus:ring-green-300"
             />
-            {errors.location && <p className="text-red-500 text-sm">{errors.location}</p>}
+            {errors.address && <p className="text-red-500 text-sm">{errors.address}</p>}
           </div>
         </div>
 
@@ -161,4 +163,5 @@ const FreelancerRegistration = () => {
   );
 };
 
-export default FreelancerRegistration;
+export default Step2
+;

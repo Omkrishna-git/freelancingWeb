@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useRegistration } from "../pages/RegistrationContext"; 
 
-const RegisterForm = () => {
+const Step1 = () => {
   const navigate = useNavigate();
-
+  const { registrationData, setRegistrationData } = useRegistration();
   // Form State
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
+    fullName: registrationData.fullName || "",
+    email: registrationData.email || "",
     password: "",
     confirmPassword: "",
   });
@@ -25,35 +26,11 @@ const RegisterForm = () => {
   // Validate Form
   const validate = () => {
     let newErrors = {};
-
-    // Fullname Validation
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = "Fullname is required";
-    } else if (formData.fullName.trim().length < 3) {
-      newErrors.fullName = "Fullname must be at least 3 characters";
-    }
-
-    // Email Validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Enter a valid email";
-    }
-
-    // Password Validation
-    if (!formData.password) {
-      newErrors.password = "Password is required";
-    } else if (formData.password.length < 6) {
-      newErrors.password = "Password must be at least 6 characters";
-    }
-
-    // Confirm Password Validation
-    if (!formData.confirmPassword) {
-      newErrors.confirmPassword = "Confirm Password is required";
-    } else if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
-    }
+    if (!formData.fullName.trim()) newErrors.fullName = "Fullname is required";
+    if (!formData.email.trim()) newErrors.email = "Email is required";
+    if (!formData.password) newErrors.password = "Password is required";
+    if (!formData.confirmPassword) newErrors.confirmPassword = "Confirm Password is required";
+    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Passwords do not match";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -62,8 +39,9 @@ const RegisterForm = () => {
   // Handle Next Button
   const handleNext = (e) => {
     e.preventDefault();
+    setRegistrationData({ ...registrationData, ...formData });
     if (validate()) {
-      navigate("/freelancer-personal-details");
+      navigate("/freelancer-personal-details", { state: { formData } });
     }
   };
 
@@ -149,6 +127,7 @@ const RegisterForm = () => {
       </div>
     </div>
   );
+
 };
 
-export default RegisterForm;
+export default Step1;

@@ -16,49 +16,40 @@ import WriteBlog from "./pages/WriteBlog"
 import BlogDetailsPage from "./pages/display-blog";
 import AdminDashboard from "./pages/AdminDashboard";
 import "./App.css";
-import FreelancerRegistration from "./pages/FreelancerRegistration";
-import FreelancerRegistration01 from "./pages/FreelancerRegistration01";
-import FreelancerRegistration02 from "./pages/FreelancerRegistration02";
 import FreeLancerDashboard from "./pages/FreelancerDashboard";
+import Step1 from "./pages/Step1";
+import Step2 from "./pages/Step2";
+import Step3 from "./pages/Step3";
+import Login from "./components/login";
+import {RegistrationProvider} from "./pages/RegistrationContext"; // Adjust the import path as necessary  
 
 function App() {
   return (
+    <RegistrationProvider>
     <Router>
      
       <Navbar />
       <Routes>
-        {/* Home Page */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Hero />
-              <Featured />
-              <Freelancers />
-              <TopCust />
-              <Reviews />
-            </>
-          }
-        />
-        {/* Other Pages */}
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/blog" element={<BlogPage/>}/>
-        <Route path="/write-blog" element={<WriteBlog/>}/>
-        <Route path="/company-registration" element={<CompanyRegistration />} />
-        <Route path="/blog/:id" element={<BlogDetailsPage />}/>
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/blog" element={<BlogPage />} />
-        <Route path="/company-registration" element={<CompanyRegistration />} /> 
-        <Route path="/freelancer-registration" element={<FreelancerRegistration />} /> 
-        <Route path="/freelancer-personal-details" element={<FreelancerRegistration01 />} />
-        <Route path="/freelancer-skills" element={<FreelancerRegistration02 />} /> 
-        <Route path="/freelancer" element={<FreeLancerDashboard />} /> 
-      </Routes>
+  <Route path="/" element={<><Hero /><Featured /><Freelancers /><TopCust /><Reviews /></>} />
+  <Route path="/projects" element={<Projects />} />
+  <Route path="/about" element={<AboutUs />} />
+  <Route path="/login" element={<LoginPage />} />
+  <Route path="/blog" element={<BlogPage />} />
+  <Route path="/write-blog" element={<WriteBlog />} />
+  <Route path="/company-registration" element={<CompanyRegistration />} />
+  <Route path="/blog/:id" element={<BlogDetailsPage />} />
+  <Route path="/admin" element={<AdminDashboard />} />
+  <Route path="/freelancer-registration" element={<Step1 />} />
+  <Route path="/freelancer-personal-details" element={<Step2 />} />
+  <Route path="/freelancer-skills" element={<Step3 />} />
+  <Route path="/freelancer" element={<FreeLancerDashboard />} />
+  <Route path="/company-login" element={<Login />} />
+
+</Routes>
+
       <Footer />
     </Router>
+  </RegistrationProvider>
   );
 }
 
