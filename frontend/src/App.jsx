@@ -45,7 +45,6 @@ function App() {
   return (
     <RegistrationProvider>
     <Router>
-      {/* Conditionally render Navbar based on login state */}
        <Navbar />
 
       <Routes>
