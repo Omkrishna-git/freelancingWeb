@@ -46,6 +46,8 @@ const DetailsSection = () => {
   );
 };
 
+
+
 // Styles
 const styles = {
   dashboardContainer: {

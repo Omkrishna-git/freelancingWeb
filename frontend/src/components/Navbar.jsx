@@ -5,7 +5,7 @@ import ProfileWindow from "./FreelancerProfile"; // Import the Profile Window co
 
 const Navbar = () => {
   const [enabled, setEnabled] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Temporary state for login simulation
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Temporary state for login simulation
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
 
@@ -87,11 +87,15 @@ const Navbar = () => {
         ) : (
           // Login Button when not logged in
           <button
-            className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600"
-            onClick={() => setIsLoggedIn(true)} // Simulating login
-          >
-            Login
-          </button>
+          className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600"
+          onClick={() => {
+            setIsLoggedIn(true); // Simulating login
+            navigate("/login");  // Navigate to the login page
+          }}
+        >
+          Login
+        </button>
+        
         )}
       </div>
     </nav>
