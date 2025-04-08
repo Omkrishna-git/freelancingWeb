@@ -74,7 +74,7 @@ const Step1 = () => {
               name="email"
               placeholder="Your Email"
               className="w-full p-3 border rounded-lg focus:outline-none"
-              value={formData.email}
+              value={formData.email.toLowerCase()}
               onChange={handleChange}
             />
             {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}

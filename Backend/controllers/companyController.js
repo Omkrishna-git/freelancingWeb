@@ -1,10 +1,10 @@
+
 const Company = require("../models/Company");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.registerCompany = async (req, res) => {
   try {
-    console.log("Request body:", req.body);
     const { organization, email, password, contact, address } = req.body;
 
     // Validate required fields
@@ -33,7 +33,6 @@ exports.registerCompany = async (req, res) => {
     await company.save();
     res.status(201).json({ message: "Company registered successfully!" });
   } catch (error) {
-    console.error("Error registering company:", error);
     res.status(500).json({ error: "Server error" });
   }
 };
@@ -67,10 +66,20 @@ exports.loginCompany = async (req, res) => {
       process.env.JWT_SECRET ,
       { expiresIn: "1h" }
     );
-
-    res.json({ message: "Login successful", token });
+    console.log("✅ Sending login payload:", {
+      token,
+      role: "company",
+      model: "Company",
+      userId: company._id,
+    });
+    
+    res.json({
+      token,
+      role: "company",
+      model: "Company",
+      userId: company._id,
+    });
   } catch (error) {
-    console.error("Login Error:", error);
     res.status(500).json({ error: "Server error" });
   }
 };

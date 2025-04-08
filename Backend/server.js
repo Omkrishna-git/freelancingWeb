@@ -1,13 +1,12 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-require("dotenv").config();
 
 // Import routes
 const companyRoutes = require("./routes/companyRoute");
 const freelancerRoutes = require("./routes/freelancerRoute");
-
 const app = express();
 
 // Middleware
@@ -31,6 +30,8 @@ mongoose
 // API Routes
 app.use("/api/companies", companyRoutes);
 app.use("/api/freelancers", freelancerRoutes);
+app.use("/api/blogs", require("./routes/blog"));
+app.use('/uploads', express.static('uploads'));
 
 // Default Route
 app.get("/", (req, res) => {

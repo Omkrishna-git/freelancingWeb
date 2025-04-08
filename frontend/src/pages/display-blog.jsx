@@ -1,96 +1,99 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import image1 from "../assets/image 28.png";
-import image2 from "../assets/image 29.png";
-import image3 from "../assets/image 32.png";
-
-const blogData = [
-  {
-    id: 1,
-    title: 'The Ultimate Guide to Logo Redesign',
-    author: 'John Doe',
-    category: 'Graphics & design guides',
-    date: 'March 16, 2025',
-    thumbnail: image1,
-    content:
-      'Learn about when you should consider a logo redesign. The importance of branding, visual identity, and market perception are discussed in this comprehensive guide.',
-    attachedFiles: ['sample-file.pdf', 'design-template.zip'],
-  },
-  {
-    id: 2,
-    title: 'How to Build a Social Media Video Marketing Strategy',
-    author: 'Jane Smith',
-    category: 'Video & animation guides',
-    date: 'February 12, 2025',
-    thumbnail: image2,
-    content:
-      'You need scriptwriters, video editors, and quality equipment to create engaging video content. Learn the strategies that can help boost your video marketing.',
-    attachedFiles: ['marketing-guide.pdf'],
-  },
-  {
-    id: 3,
-    title: '10 Ways to Make Money on Snapchat',
-    author: 'Jane Doe',
-    category: 'Digital marketing guides',
-    date: 'March 10, 2025',
-    thumbnail: image3,
-    content:
-      'Learn proven methods for monetizing your Snapchat presence and maximizing engagement.',
-    attachedFiles: ['snapchat-strategy.pdf'],
-  },
-];
+import axios from 'axios';
 
 const BlogDetailsPage = () => {
   const { id } = useParams();
-  const blog = blogData.find((b) => b.id === parseInt(id));
-
-  if (!blog) {
-    return <p className='text-center mt-10'>Blog not found.</p>;
-  }
-
+  const [blog, setBlog] = useState(null);
   const [rating, setRating] = useState(0);
   const [like, setLike] = useState(false);
   const [dislike, setDislike] = useState(false);
-  
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchBlog = async () => {
+      try {
+        const res = await axios.get(`/api/blog/${id}`);
+        setBlog(res.data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching blog:', error);
+        setLoading(false);
+      }
+    };
+
+    fetchBlog();
+  }, [id]);
 
   const handleRating = (rate) => setRating(rate);
-
   const toggleLike = () => {
     setLike(!like);
     if (dislike) setDislike(false);
   };
-
   const toggleDislike = () => {
     setDislike(!dislike);
     if (like) setLike(false);
   };
 
+  const formatDate = (isoString) => new Date(isoString).toLocaleDateString();
+
+  if (loading) return <p className='text-center mt-10'>Loading blog...</p>;
+  if (!blog) return <p className='text-center mt-10'>Blog not found.</p>;
+
   return (
     <div className='px-6 py-10'>
-      <div className='max-w-8xl mx-auto bg-white p-6 rounded-lg shadow-md r'>
-        <Link to='/blog' className='text-blue-500 hover:underline'>Back to Blogs</Link>
-        {/* <img
-          src={blog.thumbnail}
-          alt={blog.title}
-          className='w-1/2 h-1/4 object-cover rounded-md mt-4  mx-auto'
-        /> */}
+      <div className='max-w-8xl mx-auto bg-white p-6 rounded-lg shadow-md'>
+        <Link to='/blog' className='text-blue-500 hover:underline'>← Back to Blogs</Link>
+
+        {blog.thumbnail && (
+          <img
+            src={blog.thumbnail}
+            alt={blog.title}
+            className='w-full max-h-96 object-cover rounded-md mt-4'
+          />
+        )}
+
         <h1 className='text-3xl font-bold mt-4'>{blog.title}</h1>
+
         <p className='text-gray-600 mt-2'>
-          By {blog.author} | {blog.category} | {blog.date}
+          By <span className="font-medium">{blog.author}</span> ({blog.userModel}) | 
+          {` ${blog.category} | ${formatDate(blog.createdAt)} `}
+          <span className={`ml-2 text-sm px-2 py-1 rounded-full ${
+            blog.status === 'published' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'
+          }`}>
+            {blog.status}
+          </span>
         </p>
-        <p className='mt-4'>{blog.content}</p>
+
+        <div className='mt-4'>
+          <p className='text-gray-800 leading-relaxed'>{blog.content}</p>
+        </div>
+
+        {/* Tags */}
+        <div className='mt-4 flex flex-wrap gap-2'>
+          {blog.tags && blog.tags.map((tag, index) => (
+            <span
+              key={index}
+              className='bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full'
+            >
+              #{tag}
+            </span>
+          ))}
+        </div>
 
         {/* Attached Files */}
         <div className='mt-6'>
           <h3 className='text-lg font-semibold'>Attached Files:</h3>
           <ul className='list-disc list-inside'>
-            {blog.attachedFiles.map((file, index) => (
+            {blog.attachedFiles && blog.attachedFiles.map((file, index) => (
               <li key={index} className='text-blue-600 underline cursor-pointer'>
                 {file}
               </li>
             ))}
           </ul>
+        </div>
+
+        {/* Rating Section */}
         <div className='mt-6'>
           <h3 className='text-lg font-semibold'>Rate this Blog:</h3>
           {[1, 2, 3, 4, 5].map((star) => (
@@ -122,8 +125,7 @@ const BlogDetailsPage = () => {
         </div>
       </div>
     </div>
-  </div>
-);
+  );
 };
 
 export default BlogDetailsPage;

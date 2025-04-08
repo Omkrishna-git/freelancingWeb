@@ -1,17 +1,26 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext"; // Adjust the path as needed
 
 const Login = () => {
   const navigate = useNavigate();
-  const [role, setRole] = useState("company"); // Default role
+  const { login } = useContext(AuthContext);
+  const { role: routeRole } = useParams();
+  const [role, setRole] = useState(routeRole || "company");
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
     setError(""); // Clear error when typing
+
   };
+
+  useEffect(() => {
+    if (routeRole !== "company" && routeRole !== "freelancer") {
+      setRole("company"); // fallback to company
+    }
+  }, [routeRole]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,15 +37,26 @@ const Login = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include", // Allow cookies
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          email: formData.email.trim(), // Trim whitespace
+          password: formData.password.trim(), // Trim whitespace
+        }),
       });
-
-      const data = await response.json();
       if (response.ok) {
-        localStorage.setItem("role", role); // Store role
-        navigate(role === "company" ? "/company-dashboard" : "/freelancer-dashboard");
+        const data = await response.json();
+        console.log(data.token);
+        console.log(data.role);
+        console.log(data.model);
+        console.log(data.userId);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("role", data.role);        // if needed
+        localStorage.setItem("userModel", data.model);  // "Freelancer" or "Company"
+        localStorage.setItem("userId", data.userId);
+
+        login();
+        navigate(role === "company" ? "/company" : "/freelancer");
       } else {
-        setError(data.error || "Login failed. Please try again.");
+        setError( "Login failed. Please try again.");
       }
     } catch (error) {
       setError("Server error. Please try again later: " + error.message);
@@ -54,17 +74,10 @@ const Login = () => {
         {error && <p className="text-red-500 text-center">{error}</p>}
 
         <form onSubmit={handleLogin}>
-          {/* Role Selection */}
+          {/* Role Info - Hidden Input or Display */}
           <div className="mb-4">
-            <label className="block text-lg font-semibold">Login as:</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value)}
-              className="w-full p-3 border rounded-lg focus:outline-none"
-            >
-              <option value="company">Company</option>
-              <option value="freelancer">Freelancer</option>
-            </select>
+            <label className="block text-md text-green-800">Logging in as {role}</label>
+            <p className="text-md font-medium capitalize"></p>
           </div>
 
           {/* Email Input */}
@@ -75,7 +88,7 @@ const Login = () => {
               name="email"
               placeholder="Enter your email"
               className="w-full p-3 border rounded-lg focus:outline-none"
-              value={formData.email}
+              value={formData.email.toLowerCase()}
               onChange={handleChange}
             />
           </div>

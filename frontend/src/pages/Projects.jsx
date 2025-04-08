@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import DemoImage from "../assets/project.png";
 import DemoImage2 from "../assets/demo.png";
-
+import { FaSearch, FaPlus } from "react-icons/fa";
 const Projects = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
@@ -85,6 +85,17 @@ const Projects = () => {
     <div className="min-h-screen bg-gray-50 p-8">
       {/* Filters & Sorting Section */}
       <div className="flex flex-wrap justify-between items-center m-4">
+        {/* Search Input */}
+                <div className="relative w-full sm:w-1/3">
+                  <input
+                    type="text"
+                    placeholder="Search projects..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
+                  />
+                  <FaSearch className="absolute right-3 top-3 text-gray-500" />
+                </div>
         {/* Filter Dropdown */}
         <div className="relative flex flex-col sm:flex-row sm:items-center">
           <span className="text-lg font-semibold mr-4 text-gray-700">

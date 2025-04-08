@@ -9,12 +9,20 @@ const LoginPage = () => {
 
   const handleRoleSelection = (role) => {
     setSelectedRole(role);
-    if (role === "client") {
-      navigate("/company-registration");
+    localStorage.setItem("role", role); 
+  };
+
+
+  const handleCreateAccount = () => {
+    if (!selectedRole) {
+      alert("Please select a role first.");
+      return;
     }
-    if(role === "freelancer")
-    {
-      navigate("/freelancer-registration")
+
+    if (selectedRole === "client") {
+      navigate("/company-registration");
+    } else if (selectedRole === "freelancer") {
+      navigate("/freelancer-registration");
     }
   };
 
@@ -46,11 +54,21 @@ const LoginPage = () => {
 
       {/* Buttons */}
       <div className="flex flex-col items-center mt-10">
-        <button className="bg-green-400 text-white px-6 py-1 rounded-md font-bold">
+        <button className="bg-green-400 text-white px-6 py-1 rounded-md font-bold"onClick={handleCreateAccount}>
           Create Account
         </button>
         <p className="mt-2 text-lg">
-          Already have an account? <span className="text-green-500 cursor-pointer">Log In</span>
+          Already have an account? <span className="text-green-500 cursor-pointer" onClick={()=>{
+            if(!selectedRole)
+            {
+              alert("Please select a role first.");
+              return;
+            }
+            else
+            {
+              navigate(`/login/${selectedRole}`);
+            }
+          }}>Log In</span>
         </p>
       </div>
     </div>

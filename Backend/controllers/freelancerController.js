@@ -46,14 +46,12 @@ exports.registerFreelancer = async (req, res) => {
   }
 };
 
-
-// Freelancer Login
 exports.loginFreelancer = async (req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   try {
     const { email, password } = req.body;
-    const freelancer = await Freelancer.findOne({ email });
+    const freelancer = await Freelancer.findOne({ email: email.toLowerCase() });
 
     if (!freelancer) return res.status(400).json({ error: "Freelancer not found" });
 
@@ -62,7 +60,12 @@ exports.loginFreelancer = async (req, res) => {
 
     const token = jwt.sign({ id: freelancer._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
 
-    res.status(200).json({ token, freelancer });
+    res.json({
+      token,
+      role: "freelancer",
+      model: "Freelancer",
+      userId: freelancer._id,
+    });
 
   } catch (error) {
     res.status(500).json({ error: error.message });
