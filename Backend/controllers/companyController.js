@@ -38,7 +38,7 @@ exports.registerCompany = async (req, res) => {
 };
 
 exports.loginCompany = async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5174");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   const { email, password } = req.body;
 
@@ -66,13 +66,6 @@ exports.loginCompany = async (req, res) => {
       process.env.JWT_SECRET ,
       { expiresIn: "1h" }
     );
-    console.log("✅ Sending login payload:", {
-      token,
-      role: "company",
-      model: "Company",
-      userId: company._id,
-    });
-
     res.json({
       token,
       role: "company",
@@ -81,5 +74,59 @@ exports.loginCompany = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({ error: "Server error" });
+  }
+};
+
+
+
+exports.getCompanyById = async (req, res) => {
+  try {
+
+    const company = await Company.findById(req.params.id);
+
+    if (!company) return res.status(404).json({ message: "Company not found" });
+
+    // Send base64 encoded logo (for frontend image preview)
+    const companyData = company.toObject();
+    if (company.logo && company.logo.data) {
+      companyData.logo = `data:${company.logo.contentType};base64,${company.logo.data.toString("base64")}`;
+    } else {
+      companyData.logo = null;
+    }
+
+    res.json(companyData);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Update company profile
+exports.updateCompanyProfile = async (req, res) => {
+  try {
+    const updatedCompany = await Company.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(updatedCompany);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+// Upload logo and store as buffer
+exports.uploadCompanyLogo = async (req, res) => {
+  try {
+    const logoBuffer = req.file.buffer;
+    const contentType = req.file.mimetype;
+
+    const updated = await Company.findByIdAndUpdate(
+      req.params.id,
+      { logo: { data: logoBuffer, contentType: contentType } },
+      { new: true }
+    );
+
+    const updatedObj = updated.toObject();
+    updatedObj.logo = `data:${updated.logo.contentType};base64,${updated.logo.data.toString("base64")}`;
+
+    res.json(updatedObj);
+  } catch (err) {
+    res.status(500).json({ message: "Failed to upload logo", error: err.message });
   }
 };

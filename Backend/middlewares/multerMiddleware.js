@@ -16,7 +16,16 @@ const blogUpload = upload.fields([
   { name: "attachedFile", maxCount: 1 },
 ]);
 
+const projectUpload = upload.fields([
+  { name: "references", maxCount: 1 },
+  { name: "agreement", maxCount: 1 },
+]);
+
+
 // POST route with Multer
 router.post("/", blogUpload, blogController.createBlog);
 
-module.exports = router;
+module.exports = {
+  blogUpload,
+  projectUpload,
+};

@@ -18,12 +18,10 @@ const ProfileWindow = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (userId) {
-      console.log("Fetching data for userId:", userId);
       axios
         .get(`http://localhost:8000/api/freelancers/${userId}`) // change here if your backend uses /freelancers/user/${userId}
         .then((res) => {
           const data = res.data;
-          console.log("API Response Data:", data);
           setName(data.fullName ||"John")
           setAbout(data.about || "");
           setEducation(data.education || []);

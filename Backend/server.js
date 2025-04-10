@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 // Import routes
 const companyRoutes = require("./routes/companyRoute");
 const freelancerRoutes = require("./routes/freelancerRoute");
+const projectRoutes = require("./routes/projectRoute");
 const app = express();
 
 // Middleware
@@ -32,6 +33,7 @@ app.use("/api/companies", companyRoutes);
 app.use("/api/freelancers", freelancerRoutes);
 app.use("/api/blogs", require("./routes/blog"));
 app.use('/uploads', express.static('uploads'));
+app.use("/api/projects", projectRoutes);
 
 
 

@@ -38,12 +38,15 @@ const BlogsPage = () => {
         <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
           Everything you need to know to grow your business...
         </p>
-        <Link
-          to="/write-blog"
-          className="absolute top-0 right-1 text-gray p-3 rounded-full hover:bg-green-800 transition"
-        >
-          <FaPlus className="text-xl" />
-        </Link>
+        {localStorage.getItem("userModel") && (
+          <Link
+            to="/write-blog"
+            className="absolute top-0 right-1 text-gray p-3 rounded-full hover:bg-green-800 transition"
+          >
+            <FaPlus className="text-xl" />
+          </Link>
+        )}
+
       </div>
 
       {/* Search, Filter, Sort */}

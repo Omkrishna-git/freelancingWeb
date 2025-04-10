@@ -1,24 +1,27 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Switch } from "@headlessui/react";
-import { AuthContext } from "../context/AuthContext"; // import the context
+import { AuthContext } from "../context/AuthContext";
 import ProfileWindow from "./FreelancerProfile";
+import CompanyProfileWindow from "./CompanyProfile"; // 🆕 Import company profile
 
 const Navbar = () => {
   const [enabled, setEnabled] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const navigate = useNavigate();
 
-  const { isLoggedIn, logout } = useContext(AuthContext); // 🔥 Access login state
-  const handlelogout=()=>
-  {
+  const { isLoggedIn, logout } = useContext(AuthContext);
+  const userModel = localStorage.getItem("userModel"); // 🔥 Get user model
+
+  const handleLogout = () => {
     logout();
     localStorage.removeItem("token");
     localStorage.removeItem("userModel");
     localStorage.removeItem("role");
-
+    localStorage.removeItem("userId");
     navigate("/loginPage");
-  }
+  };
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (!event.target.closest(".profile-container")) {
@@ -69,22 +72,30 @@ const Navbar = () => {
         {isLoggedIn ? (
           <div className="relative profile-container flex items-center space-x-2">
             <img
-              src="https://tse1.mm.bing.net/th?id=OIP.GHGGLYe7gDfZUzF_tElxiQHaHa&pid=Api&P=0&h=180" // Replace with actual profile image URL
+              src="https://tse1.mm.bing.net/th?id=OIP.GHGGLYe7gDfZUzF_tElxiQHaHa&pid=Api&P=0&h=180"
               alt="Profile"
               className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-gray-500"
               onClick={() => setIsProfileOpen(!isProfileOpen)}
             />
             <button
-              onClick={handlelogout}
+              onClick={handleLogout}
               className="text-sm px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
             >
               Logout
             </button>
-            <ProfileWindow
-              isOpen={isProfileOpen}
-              onClose={() => setIsProfileOpen(false)}
-              style={{ display: isProfileOpen ? "block" : "none" }}
-            />
+
+            {/* 🔁 Conditional rendering of profile window */}
+            {userModel === "Freelancer" ? (
+              <ProfileWindow
+                isOpen={isProfileOpen}
+                onClose={() => setIsProfileOpen(false)}
+              />
+            ) : userModel === "Company" ? (
+              <CompanyProfileWindow
+                isOpen={isProfileOpen}
+                onClose={() => setIsProfileOpen(false)}
+              />
+            ) : null}
           </div>
         ) : (
           <button

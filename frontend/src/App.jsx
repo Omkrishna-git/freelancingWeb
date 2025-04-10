@@ -16,14 +16,14 @@ import CompanyRegistration from "./pages/CompanyRegistration";
 import WriteBlog from "./pages/WriteBlog"
 import BlogDetailsPage from "./pages/display-blog";
 import AdminDashboard from "./pages/AdminDashboard";
-import "./App.css";
 import FreeLancerDashboard from "./pages/FreelancerDashboard";
 import Step1 from "./pages/Step1";
 import Step2 from "./pages/Step2";
 import Step3 from "./pages/Step3";
 import Login from "./components/login";
 import {RegistrationProvider} from "./pages/RegistrationContext"; // Adjust the import path as necessary  
-
+import AddProject from "./components/AddProject"; // Adjust the import path as necessary
+import CompanyDashboard from './pages/CompanyDashboard'; // Adjust the import path as necessary
 import "./App.css";
 
 function App() {
@@ -48,7 +48,9 @@ function App() {
             <Route path="/freelancer-skills" element={<Step3 />} />
             <Route path="/freelancer" element={<FreeLancerDashboard />} />
             <Route path="/login/:role" element={<Login />} />
-          </Routes>
+            <Route path="/add-project" element={<AddProject />} /> 
+            <Route path="/company" element={<CompanyDashboard />} />
+          </Routes>#
         <Footer />
       </Router>
     </RegistrationProvider>
