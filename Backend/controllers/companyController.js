@@ -38,7 +38,7 @@ exports.registerCompany = async (req, res) => {
 };
 
 exports.loginCompany = async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5174");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   const { email, password } = req.body;
 
@@ -72,7 +72,7 @@ exports.loginCompany = async (req, res) => {
       model: "Company",
       userId: company._id,
     });
-    
+
     res.json({
       token,
       role: "company",

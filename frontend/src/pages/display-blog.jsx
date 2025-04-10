@@ -13,8 +13,8 @@ const BlogDetailsPage = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await axios.get(`/api/blog/${id}`);
-        setBlog(res.data);
+        const res = await axios.get(`http://localhost:8000/api/blogs/${id}`);
+        setBlog(res.data.blog || res.data); // fallback for both structures
         setLoading(false);
       } catch (error) {
         console.error('Error fetching blog:', error);
@@ -37,6 +37,26 @@ const BlogDetailsPage = () => {
 
   const formatDate = (isoString) => new Date(isoString).toLocaleDateString();
 
+  // Handle image conversion
+  const getImageUrl = () => {
+    if (
+      blog?.thumbnail?.data &&
+      blog?.thumbnail?.contentType
+    ) {
+      const base64String = btoa(
+        new Uint8Array(blog.thumbnail.data.data).reduce(
+          (acc, byte) => acc + String.fromCharCode(byte),
+          ''
+        )
+      );
+      return `data:${blog.thumbnail.contentType};base64,${base64String}`;
+    } else if (typeof blog?.thumbnail === 'string') {
+      return blog.thumbnail; // use as URL
+    } else {
+      return '/default-thumbnail.jpg'; // fallback image path
+    }
+  };
+
   if (loading) return <p className='text-center mt-10'>Loading blog...</p>;
   if (!blog) return <p className='text-center mt-10'>Blog not found.</p>;
 
@@ -47,7 +67,7 @@ const BlogDetailsPage = () => {
 
         {blog.thumbnail && (
           <img
-            src={blog.thumbnail}
+            src={getImageUrl()}
             alt={blog.title}
             className='w-full max-h-96 object-cover rounded-md mt-4'
           />
@@ -85,11 +105,30 @@ const BlogDetailsPage = () => {
         <div className='mt-6'>
           <h3 className='text-lg font-semibold'>Attached Files:</h3>
           <ul className='list-disc list-inside'>
-            {blog.attachedFiles && blog.attachedFiles.map((file, index) => (
-              <li key={index} className='text-blue-600 underline cursor-pointer'>
-                {file}
-              </li>
-            ))}
+            {blog.attachedFiles && blog.attachedFiles.map((file, index) => {
+              if (file?.data && file?.contentType) {
+                const base64String = btoa(
+                  new Uint8Array(file.data.data).reduce(
+                    (acc, byte) => acc + String.fromCharCode(byte),
+                    ''
+                  )
+                );
+                const fileUrl = `data:${file.contentType};base64,${base64String}`;
+                return (
+                  <li key={index}>
+                    <a href={fileUrl} download={`file_${index}`} className='text-blue-600 underline'>
+                      Download File {index + 1}
+                    </a>
+                  </li>
+                );
+              } else {
+                return (
+                  <li key={index} className='text-blue-600 underline'>
+                    {typeof file === 'string' ? file : `File ${index + 1}`}
+                  </li>
+                );
+              }
+            })}
           </ul>
         </div>
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaSearch, FaPlus, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import DemoImage2 from "../assets/demo.png"; // Fallback author image
+import DemoImage2 from "../assets/demo.png";
 import axios from "axios";
 
 const BlogsPage = () => {
@@ -13,7 +13,9 @@ const BlogsPage = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const res = await axios.get("/api/blogs"); // adjust if your route is different
+        const res = await axios.get("http://localhost:8000/api/blogs", {
+          withCredentials: true,
+        });
         setBlogs(res.data.blogs || []);
       } catch (error) {
         console.error("❌ Error fetching blogs:", error);
@@ -31,7 +33,6 @@ const BlogsPage = () => {
 
   return (
     <div className="px-6 py-1 mb-10">
-      {/* Header */}
       <div className="relative text-center">
         <h1 className="text-3xl font-bold text-green-900 mt-5">BLOGS</h1>
         <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
@@ -45,7 +46,7 @@ const BlogsPage = () => {
         </Link>
       </div>
 
-      {/* Search, Filter & Sort */}
+      {/* Search, Filter, Sort */}
       <div className="flex flex-col sm:flex-row justify-between items-center mt-6 gap-4">
         <div className="relative w-full sm:w-1/3">
           <input
@@ -106,7 +107,9 @@ const BlogsPage = () => {
                 <div className="mt-4 flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <img src={DemoImage2} alt={blog.author} className="w-8 h-8 rounded-full" />
-                    <span className="text-sm text-gray-700">{blog.author}</span>
+                    <span className="text-sm text-gray-700">
+                      {blog.author}
+                    </span>
                   </div>
                   <div className="mt-2 flex items-center">
                     {[...Array(5)].map((_, i) => (
@@ -117,9 +120,7 @@ const BlogsPage = () => {
                         }`}
                       />
                     ))}
-                    <span className="ml-2 text-sm text-gray-600">
-                      ({blog.rating || 4.0})
-                    </span>
+                    <span className="ml-2 text-sm text-gray-600">({blog.rating || 4.0})</span>
                   </div>
                 </div>
               </div>

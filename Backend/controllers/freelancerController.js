@@ -36,7 +36,7 @@ exports.registerFreelancer = async (req, res) => {
 
 // Login Freelancer
 exports.loginFreelancer = async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5174");
   res.setHeader("Access-Control-Allow-Credentials", "true");
   try {
     const { email, password } = req.body;
