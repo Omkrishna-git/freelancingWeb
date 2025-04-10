@@ -33,6 +33,8 @@ app.use("/api/freelancers", freelancerRoutes);
 app.use("/api/blogs", require("./routes/blog"));
 app.use('/uploads', express.static('uploads'));
 
+
+
 // Default Route
 app.get("/", (req, res) => {
   res.send("Welcome to the Freelancing Website API!");

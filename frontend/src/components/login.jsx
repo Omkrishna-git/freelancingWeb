@@ -44,10 +44,7 @@ const Login = () => {
       });
       if (response.ok) {
         const data = await response.json();
-        console.log(data.token);
-        console.log(data.role);
-        console.log(data.model);
-        console.log(data.userId);
+       
         localStorage.setItem("token", data.token);
         localStorage.setItem("role", data.role);        // if needed
         localStorage.setItem("userModel", data.model);  // "Freelancer" or "Company"

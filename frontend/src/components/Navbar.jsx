@@ -69,7 +69,7 @@ const Navbar = () => {
         {isLoggedIn ? (
           <div className="relative profile-container flex items-center space-x-2">
             <img
-              src="../assets/demo.png" // Replace with actual profile image URL
+              src="https://tse1.mm.bing.net/th?id=OIP.GHGGLYe7gDfZUzF_tElxiQHaHa&pid=Api&P=0&h=180" // Replace with actual profile image URL
               alt="Profile"
               className="w-10 h-10 rounded-full cursor-pointer border-2 border-gray-300 hover:border-gray-500"
               onClick={() => setIsProfileOpen(!isProfileOpen)}

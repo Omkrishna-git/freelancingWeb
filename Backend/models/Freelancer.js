@@ -16,7 +16,13 @@ const FreelancerSchema = new mongoose.Schema({
   resume: { type: String },
   languages: { type: [String], required: true },
   projectCategories: { type: [String], required: true },
-  status: { type: String, default: "active" }
+  status: { type: String, default: "active" },
+
+  // 🔽 Optional profile fields (not required)
+  about: { type: String, default: "" },
+  education: { type: [String], default: [] },
+  certifications: { type: [String], default: [] },
+  profileImage: { type: String }
 });
 
 module.exports = mongoose.model("Freelancer", FreelancerSchema);
