@@ -45,13 +45,13 @@ const Freelancers = () => {
           <div key={index} className="bg-green-100 p-6 rounded-lg shadow-md text-center">
             <img src={freelancer.img} alt={freelancer.name} className="w-24 h-24 rounded-full mx-auto" />
             <h3 className="mt-4 text-lg font-semibold">{freelancer.name}</h3>
-            <p className="text-sm text-gray-600">{freelancer.title}</p>
+            <p className="text-sm text-[#3e704c]">{freelancer.title}</p>
 
             <div className="mt-4">
               <h4 className="text-sm font-semibold text-gray-700">Expertise</h4>
               <div className="flex flex-wrap justify-center gap-2 mt-2">
                 {freelancer.expertise.map((skill, idx) => (
-                  <span key={idx} className="bg-gray-200 text-sm px-3 py-1 rounded-full">
+                  <span key={idx} className="bg-[#6c887b] text-[#d7e5de] text-sm px-3 py-1 rounded-full">
                     {skill}
                   </span>
                 ))}
@@ -59,7 +59,7 @@ const Freelancers = () => {
             </div>
 
             <div className="mt-4">
-              <h4 className="text-sm font-semibold text-gray-700">Previously at</h4>
+              <h4 className="text-sm font-semibold text-[#1c3f2f]">Previously at</h4>
               <p className="text-gray-900 font-semibold">{freelancer.company}</p>
             </div>
           </div>

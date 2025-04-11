@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { FaStar, FaRegStar } from "react-icons/fa";
-import DemoImage from "../assets/demo.png"; // Importing the correct image
+import { motion } from "framer-motion";
+import DemoImage from "../assets/demo.png";
 
 const reviews = [
   {
@@ -34,11 +36,64 @@ const reviews = [
     rating: 2,
     img: DemoImage,
   },
+  {
+    name: "Riya Sharma",
+    date: "April 2, 2025",
+    title: "Truly Impressive",
+    body: "Very happy with the output. The attention to detail was top-notch.",
+    rating: 5,
+    img: DemoImage,
+  },
+  {
+    name: "Amit Verma",
+    date: "March 22, 2025",
+    title: "Great support!",
+    body: "The team was always available for changes and queries. Thank you!",
+    rating: 4,
+    img: DemoImage,
+  },
+  {
+    name: "Neha Kulkarni",
+    date: "February 28, 2025",
+    title: "Well done",
+    body: "Good experience overall, though there was a slight delay in delivery.",
+    rating: 3,
+    img: DemoImage,
+  },
+  {
+    name: "Arjun Patel",
+    date: "January 12, 2025",
+    title: "Could be better",
+    body: "The design part was good but development had some bugs.",
+    rating: 2,
+    img: DemoImage,
+  },
+  {
+    name: "Priya Nair",
+    date: "December 5, 2024",
+    title: "Smooth and Easy",
+    body: "Very easy to work with. Everything was done as requested.",
+    rating: 5,
+    img: DemoImage,
+  },
+  {
+    name: "Rahul Mehta",
+    date: "November 17, 2024",
+    title: "Professional experience",
+    body: "Appreciated the professionalism and fast response times!",
+    rating: 4,
+    img: DemoImage,
+  },
 ];
 
-const ReviewCard = ({ name, date, title, body, rating, img }) => {
+const ReviewCard = ({ name, date, title, body, rating, img, onHoverStart, onHoverEnd }) => {
   return (
-    <div className="bg-green-100 rounded-xl p-6 shadow-md flex flex-col items-center text-center w-full sm:w-[300px]">
+    <motion.div
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+      whileHover={{ scale: 1.05 }}
+      className="bg-green-100 rounded-xl p-6 shadow-md flex flex-col items-center text-center w-full sm:w-[300px] shrink-0"
+    >
       <img src={img} alt={name} className="w-12 h-12 rounded-full mb-3" />
       <div className="text-gray-600 text-sm font-semibold">{name}</div>
       <div className="text-gray-400 text-xs">{date}</div>
@@ -51,13 +106,15 @@ const ReviewCard = ({ name, date, title, body, rating, img }) => {
           </span>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 const Reviews = () => {
+  const [isPaused, setIsPaused] = useState(false);
+
   return (
-    <section className="py-10 bg-gray-50">
+    <section className="py-10 bg-gray-50 overflow-hidden">
       <div className="text-center">
         <h2 className="text-2xl font-bold text-gray-900">
           Our Clients’ Satisfaction is Our Top Priority
@@ -67,10 +124,25 @@ const Reviews = () => {
         </p>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-6 mt-8">
-        {reviews.map((review, index) => (
-          <ReviewCard key={index} {...review} />
-        ))}
+      <div className="overflow-hidden mt-8">
+        <motion.div
+          className="flex gap-6 w-max"
+          animate={!isPaused ? { x: ["0%", "-50%"] } : false}
+          transition={{
+            repeat: Infinity,
+            duration: 40,
+            ease: "linear",
+          }}
+        >
+          {[...reviews, ...reviews].map((review, index) => (
+            <ReviewCard
+              key={index}
+              {...review}
+              onHoverStart={() => setIsPaused(true)}
+              onHoverEnd={() => setIsPaused(false)}
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
