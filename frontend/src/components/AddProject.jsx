@@ -47,7 +47,7 @@ const AddProject = () => {
         if (formattedFormData[key] !== null && formattedFormData[key] !== undefined) {
           data.append(key, formattedFormData[key]);
         }
-      }
+      } 
   
       // Append each tech stack as separate value (handled as array by backend)
       techStackArray.forEach(tech => data.append('techStack', tech));
@@ -137,7 +137,7 @@ const AddProject = () => {
         <input type="file" name="agreement" onChange={handleChange} className="w-full border px-4 py-2 rounded" />
       </div>
 
-      <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+      <button type="submit" className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">
         Submit Project
       </button>
     </form>

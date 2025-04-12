@@ -15,7 +15,7 @@ const Projects = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/projects/", {
+        const res = await axios.get("http://localhost:8000/api/freelancerprojects/", {
           withCredentials: true,
         });
         setProjects(res.data);
@@ -61,7 +61,7 @@ const Projects = () => {
               </p>
         {userModel === "Company" && (
           <Link
-            to="/add-project"
+            to="/add-freelancerproject"
             className="absolute top-0 right-1 text-gray p-3 rounded-full hover:bg-green-800 transition"
           >
             <FaPlus className="text-xl" />

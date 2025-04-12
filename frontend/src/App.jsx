@@ -23,6 +23,7 @@ import Step3 from "./pages/Step3";
 import Login from "./components/login";
 import {RegistrationProvider} from "./pages/RegistrationContext"; // Adjust the import path as necessary  
 import AddProject from "./components/AddProject"; // Adjust the import path as necessary
+import AddFreelancerProject from "./components/AddFreelancerProject";
 import CompanyDashboard from './pages/CompanyDashboard'; // Adjust the import path as necessary
 import "./App.css";
 
@@ -48,9 +49,9 @@ function App() {
             <Route path="/freelancer-skills" element={<Step3 />} />
             <Route path="/freelancer" element={<FreeLancerDashboard />} />
             <Route path="/login/:role" element={<Login />} />
-            <Route path="/add-project" element={<AddProject />} /> 
+            <Route path="/add-freelancerproject" element={<AddFreelancerProject/>} /> 
             <Route path="/company" element={<CompanyDashboard />} />
-          </Routes>#
+          </Routes>
         <Footer />
       </Router>
     </RegistrationProvider>

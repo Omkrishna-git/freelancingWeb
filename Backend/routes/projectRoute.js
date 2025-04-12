@@ -8,3 +8,4 @@ const { projectUpload } = require("../middlewares/multerMiddleware");
 router.post("/createProject",verifyToken, projectUpload, createProject);
 router.get("/", getProjects);
 module.exports = router;
+ 

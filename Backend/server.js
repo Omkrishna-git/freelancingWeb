@@ -8,6 +8,7 @@ const cookieParser = require("cookie-parser");
 const companyRoutes = require("./routes/companyRoute");
 const freelancerRoutes = require("./routes/freelancerRoute");
 const projectRoutes = require("./routes/projectRoute");
+const freelancerProjectRoutes = require("./routes/freelancerProjectRoute");
 const app = express();
 
 // Middleware
@@ -24,9 +25,9 @@ app.use(
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
+.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log("✅ MongoDB Connected"))
+.catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
 
 // API Routes
 app.use("/api/companies", companyRoutes);
@@ -34,6 +35,7 @@ app.use("/api/freelancers", freelancerRoutes);
 app.use("/api/blogs", require("./routes/blog"));
 app.use('/uploads', express.static('uploads'));
 app.use("/api/projects", projectRoutes);
+app.use("/api/freelancerprojects", freelancerProjectRoutes);
 
 
 
