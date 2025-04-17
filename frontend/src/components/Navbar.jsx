@@ -47,15 +47,25 @@ const Navbar = () => {
       </div>
 
       <ul className="hidden md:flex space-x-6 text-gray-800">
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/projects">Projects</Link></li>
-        <li><Link to="/about">About Us</Link></li>
-        <li><Link to="/blog">Blogs</Link></li>
-        <li><Link to="/features">Features</Link></li>
+        <li>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/projects">Projects</Link>
+        </li>
+        <li>
+          <Link to="/features">Features</Link>
+        </li>
+        <li>
+          <Link to="/blog">Blogs</Link>
+        </li>
+        <li>
+          <Link to="/about">About Us</Link>
+        </li>
       </ul>
 
       <div className="flex items-center space-x-4">
-        <Switch
+        {/* <Switch
           checked={enabled}
           onChange={setEnabled}
           className={`${
@@ -67,7 +77,7 @@ const Navbar = () => {
               enabled ? "translate-x-6" : "translate-x-1"
             } inline-block h-4 w-4 transform bg-white rounded-full transition`}
           />
-        </Switch>
+        </Switch> */}
 
         {isLoggedIn ? (
           <div className="relative profile-container flex items-center space-x-2">
@@ -99,8 +109,8 @@ const Navbar = () => {
           </div>
         ) : (
           <button
-            className="bg-gray-500 text-white px-4 py-1 rounded-lg hover:bg-gray-600"
             onClick={() => navigate("/loginPage")}
+            className="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold px-6 py-2 rounded-xl shadow-md hover:from-green-600 hover:to-green-700 hover:scale-105 transition duration-300 ease-in-out"
           >
             Login
           </button>

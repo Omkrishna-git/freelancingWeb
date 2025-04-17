@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import clientIcon from "../assets/icons8-company-80.png";
-import freelancerIcon from "../assets/icons8-freelancer-64.png";
+import clientIcon from "../assets/company.png";
+import freelancerIcon from "../assets/freelancer.png";
+// Import ToastContainer and toast from react-toastify
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const LoginPage = () => {
   const [selectedRole, setSelectedRole] = useState(null);
@@ -12,10 +15,9 @@ const LoginPage = () => {
     localStorage.setItem("role", role); 
   };
 
-
   const handleCreateAccount = () => {
     if (!selectedRole) {
-      alert("Please select a role first.");
+      toast.success("Please select a role first.");  // Success toast in green
       return;
     }
 
@@ -27,22 +29,23 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col ">
+    <div className="min-h-screen flex flex-col">
       <div className="mt-10 text-2xl max-w-2xl mx-auto">Join as a client or freelancer</div>
+
       {/* Role Selection */}
-      <div className="flex justify-center space-x-6 mt-5">
+      <div className="flex justify-center space-x-8 mt-5">
         <div
-          className={`border p-6 rounded-lg cursor-pointer ${
+          className={`border-3 p-6 rounded-lg cursor-pointer ${
             selectedRole === "client" ? "border-green-500" : "border-gray-300"
           }`}
-          onClick={() => handleRoleSelection("client")} 
+          onClick={() => handleRoleSelection("client")}
         >
           <img src={clientIcon} alt="Client" className="mb-4 h-50" />
           <p className="text-center font-medium">I’m a client, hiring for project</p>
         </div>
 
         <div
-          className={`border p-6 rounded-lg cursor-pointer ${
+          className={`border-3 p-6 rounded-lg cursor-pointer ${
             selectedRole === "freelancer" ? "border-green-500" : "border-gray-300"
           }`}
           onClick={() => handleRoleSelection("freelancer")}
@@ -54,23 +57,32 @@ const LoginPage = () => {
 
       {/* Buttons */}
       <div className="flex flex-col items-center mt-10">
-        <button className="bg-green-400 text-white px-6 py-1 rounded-md font-bold"onClick={handleCreateAccount}>
+        <button
+          className="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold px-6 py-2 rounded-xl shadow-md hover:from-green-600 hover:to-green-700 hover:scale-105 transition duration-300 ease-in-out"
+          onClick={handleCreateAccount}
+        >
           Create Account
         </button>
-        <p className="mt-2 text-lg">
-          Already have an account? <span className="text-green-500 cursor-pointer" onClick={()=>{
-            if(!selectedRole)
-            {
-              alert("Please select a role first.");
-              return;
-            }
-            else
-            {
-              navigate(`/login/${selectedRole}`);
-            }
-          }}>Log In</span>
+        <p className="mt-5 text-lg">
+          Already have an account?{" "}
+          <span
+            className="text-green-500 cursor-pointer"
+            onClick={() => {
+              if (!selectedRole) {
+                toast.success("Please select a role first.");  // Success toast in green
+                return;
+              } else {
+                navigate(`/login/${selectedRole}`);
+              }
+            }}
+          >
+            Log In
+          </span>
         </p>
       </div>
+
+      {/* ToastContainer to show the toast notifications */}
+      <ToastContainer />
     </div>
   );
 };

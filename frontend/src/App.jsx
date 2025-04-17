@@ -26,6 +26,7 @@ import AddProject from "./components/AddProject"; // Adjust the import path as n
 import AddFreelancerProject from "./components/AddFreelancerProject";
 import CompanyDashboard from './pages/CompanyDashboard'; // Adjust the import path as necessary
 import "./App.css";
+import Features from "./pages/fretures";
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
             <Route path="/" element={<><Hero /><Featured /><Freelancers /><TopCust /><Reviews /></>} />
             <Route path="/projects" element={<Projects />} />
             <Route path="/about" element={<AboutUs />} />
+            <Route path="/features" element={<Features />} />
             <Route path="/loginPage" element={<LoginPage />} />
             <Route path="/blog" element={<BlogPage />} />
             <Route path="/write-blog" element={<WriteBlog />} />

@@ -48,7 +48,7 @@ const Hero = () => {
       {/* Bottom Section */}
       <div className="mt-8 flex flex-col md:flex-row items-center justify-center text-gray-700 space-y-4 md:space-y-0 md:space-x-4">
         <p className="text-lg">Top talent is in high demand.</p>
-        <button className="bg-green-600 text-white px-6 py-2 rounded-full font-semibold">
+        <button className="bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold px-6 py-2 rounded-full shadow-md hover:from-green-600 hover:to-green-700 hover:scale-105 transition duration-300 ease-in-out">
           Start Hiring
         </button>
       </div>

@@ -51,7 +51,7 @@ const Freelancers = () => {
               <h4 className="text-sm font-semibold text-gray-700">Expertise</h4>
               <div className="flex flex-wrap justify-center gap-2 mt-2">
                 {freelancer.expertise.map((skill, idx) => (
-                  <span key={idx} className="bg-[#6c887b] text-[#d7e5de] text-sm px-3 py-1 rounded-full">
+                  <span key={idx} className="bg-[#aec6bb] text-[#215f40] text-sm px-3 py-1 rounded-full">
                     {skill}
                   </span>
                 ))}

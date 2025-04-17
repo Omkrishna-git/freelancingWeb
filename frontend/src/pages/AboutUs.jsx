@@ -1,108 +1,106 @@
 import React from "react";
-import { FaArrowRight, FaStar, FaAward, FaCheckCircle, FaDollarSign } from "react-icons/fa";
-import { MdVerified } from "react-icons/md";
-// import DemoImage2 from "../assets/project.png"; // Uncomment if needed
+import { FaInstagram, FaTwitter, FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
+
+// Local image imports
+import DhanvantariImg from "../assets/demo.png";
+import RutujaImg from "../assets/demo.png";
+import RevatiImg from "../assets/demo.png";
+import OmImg from "../assets/demo.png";
+
+const teamMembers = [
+  {
+    name: "Dhanvantari Pawar",
+    roll: "Roll No: 31160",
+    img: DhanvantariImg,
+    socials: {
+      twitter: "#",
+      linkedin: "#",
+      github: "#",
+      email: "#",
+    },
+  },
+  {
+    name: "Rutuja Uplenchwar",
+    roll: "Roll No: 31161",
+    img: RutujaImg,
+    socials: {
+      twitter: "#",
+      linkedin: "#",
+      github: "#",
+      email: "r#",
+    },
+  },
+  {
+    name: "Revati Ranade",
+    roll: "Roll No: 31163",
+    img: RevatiImg,
+    socials: {
+      twitter: "#",
+      linkedin: "#",
+      github: "#",
+      email: "revati@example.com",
+    },
+  },
+  {
+    name: "Onkar Patil",
+    roll: "Roll No: 31157",
+    img: OmImg,
+    socials: {
+      twitter: "#",
+      linkedin: "#",
+      github: "#",
+      email: "#",
+    },
+  },
+];
 
 const AboutUs = () => {
   return (
-    <div className="bg-gray-100 py-12 px-6 md:px-12">
-
-      {/* -------------------- First Section -------------------- */}
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row bg-white rounded-lg shadow-lg overflow-hidden">
-
-        {/* Left Section */}
-        <div className="p-8 md:w-1/2">
-          <h1 className="text-4xl font-bold text-gray-900">
-            Why businesses turn to Upwork
-          </h1>
-
-          <div className="mt-6 space-y-6">
-
-            {/* Proof of Quality */}
-            <div className="flex items-start space-x-3">
-              <MdVerified className="text-2xl text-green-600" />
-              <div>
-                <h3 className="font-bold text-gray-900">Proof of quality</h3>
-                <p className="text-gray-600">
-                  Check any pro’s work samples, client reviews, and identity verification.
-                </p>
-              </div>
-            </div>
-
-            {/* No Cost Until You Hire */}
-            <div className="flex items-start space-x-3">
-              <FaDollarSign className="text-2xl text-green-600" />
-              <div>
-                <h3 className="font-bold text-gray-900">No cost until you hire</h3>
-                <p className="text-gray-600">
-                  Interview potential fits for your job, negotiate rates, and only pay for work you approve.
-                </p>
-              </div>
-            </div>
-
-            {/* Safe and Secure */}
-            <div className="flex items-start space-x-3">
-              <FaCheckCircle className="text-2xl text-green-600" />
-              <div>
-                <h3 className="font-bold text-gray-900">Safe and secure</h3>
-                <p className="text-gray-600">
-                  Focus on your work knowing we help protect your data and privacy. We’re here with 24/7 support if you need it.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        {/* Right Section */}
-        <div className="md:w-1/2 bg-[#42554c] text-white p-8 flex flex-col justify-center items-center text-center">
-          <h2 className="text-xl font-bold mt-4">We’re the world’s work marketplace</h2>
-
-          {/* Rating */}
-          <div className="mt-4">
-            <p className="text-2xl font-semibold flex items-center justify-center gap-1">
-              <FaStar className="text-yellow-400" /> 4.9/5
-            </p>
-            <p className="text-sm text-gray-200">Clients rate professionals on Upwork</p>
-          </div>
-
-          {/* Award */}
-          <div className="mt-4">
-            <p className="text-lg font-bold flex items-center justify-center gap-1">
-              <FaAward className="text-yellow-300" /> Award winner
-            </p>
-            <p className="text-sm text-gray-200">G2’s 2021 Best Software Awards</p>
-          </div>
-        </div>
-      </div>
-
-      {/* -------------------- Second Section -------------------- */}
-      <section className="bg-[#647e73] rounded-3xl px-10 py-16 text-center max-w-4xl mx-auto mt-16">
-        <h2 className="text-4xl md:text-4xl font-bold text-[#21372e]">
-          Things for freelancers
-        </h2>
-        <p className="text-3xl md:text-2xl mt-2 font-medium text-gray-700">
-          sent to your inbox weekly
-        </p>
-
-        <form className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-          <input
-            type="email"
-            placeholder="Your email"
-            className="px-5 py-3 rounded border border-[#0e3423] focus:outline-none focus:ring-1 focus:ring-black w-full sm:w-80 text-lg"
-          />
-          <button
-            type="submit"
-            className="bg-[#293730] text-white px-5 py-3 rounded-xl text-lg font-semibold shadow-md flex items-center gap-2 hover:bg-gray-900 transition"
+    <div className="bg-white py-12 px-6 text-gray-800 mb-20">
+      <h2 className="text-3xl font-bold text-center mb-13 text-green-600">Meet the Team</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-7xl mx-auto">
+        {teamMembers.map((member, idx) => (
+          <div
+            key={idx}
+            className="bg-gray-100 p-6 rounded-lg shadow hover:shadow-lg transition text-center"
           >
-            Subscribe <FaArrowRight />
-          </button>
-        </form>
-
-        <p className="text-xl text-[#c8d5cf] mt-4">
-          Join 4,000+ freelancers · Unsubscribe anytime
-        </p>
-      </section>
+            <img
+              src={member.img}
+              alt={member.name}
+              className="w-32 h-32 mx-auto rounded-lg object-cover mb-4"
+            />
+            <h3 className="text-lg font-semibold text-green-700">{member.name}</h3>
+            <p className="text-sm mt-1 text-gray-600">{member.roll}</p>
+            <div className="flex justify-center space-x-4 mt-3 text-green-600 text-lg">
+              {member.socials.instagram && (
+                <a href={member.socials.instagram} target="_blank" rel="noreferrer">
+                  <FaInstagram />
+                </a>
+              )}
+              {member.socials.twitter && (
+                <a href={member.socials.twitter} target="_blank" rel="noreferrer">
+                  <FaTwitter />
+                </a>
+              )}
+              {member.socials.linkedin && (
+                <a href={member.socials.linkedin} target="_blank" rel="noreferrer">
+                  <FaLinkedin />
+                </a>
+              )}
+              {member.socials.github && (
+                <a href={member.socials.github} target="_blank" rel="noreferrer">
+                  <FaGithub />
+                </a>
+              )}
+              {member.socials.email && (
+                <a href={`mailto:${member.socials.email}`}>
+                  <FaEnvelope />
+                </a>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
