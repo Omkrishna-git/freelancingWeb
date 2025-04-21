@@ -191,7 +191,7 @@ const CompanyDashboard = () => {
               </p>
               <Link to="/post-project">
                 <button className="bg-green-600 text-white px-5 py-2 rounded-xl">
-                  Post a job
+                  Post a job 
                 </button>
               </Link>
             </div>
@@ -259,7 +259,7 @@ const CompanyDashboard = () => {
                     {freelancer.company}
                   </p>
                 </div>
-                <button className="mt-4 bg-green-500 hover:bg-green-600 text-white px-8 py-2 rounded-full shadow-md transition duration-200">
+                <button className="mt-4 bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-full shadow-md transition duration-200">
                   Connect with Discord
                 </button>
               </div>

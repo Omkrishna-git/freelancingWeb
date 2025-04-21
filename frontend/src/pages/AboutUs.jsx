@@ -9,6 +9,17 @@ import OmImg from "../assets/demo.png";
 
 const teamMembers = [
   {
+    name: "Revati Ranade",
+    roll: "Roll No: 31163",
+    img: RevatiImg,
+    socials: {
+      twitter: "#",
+      linkedin: "#",
+      github: "#",
+      email: "revati@example.com",
+    },
+  },
+  {
     name: "Dhanvantari Pawar",
     roll: "Roll No: 31160",
     img: DhanvantariImg,
@@ -28,17 +39,6 @@ const teamMembers = [
       linkedin: "#",
       github: "#",
       email: "r#",
-    },
-  },
-  {
-    name: "Revati Ranade",
-    roll: "Roll No: 31163",
-    img: RevatiImg,
-    socials: {
-      twitter: "#",
-      linkedin: "#",
-      github: "#",
-      email: "revati@example.com",
     },
   },
   {

@@ -48,7 +48,7 @@ const AddProject = () => {
           data.append(key, formattedFormData[key]);
         }
       } 
-  
+   
       // Append each tech stack as separate value (handled as array by backend)
       techStackArray.forEach(tech => data.append('techStack', tech));
   

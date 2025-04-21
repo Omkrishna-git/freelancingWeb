@@ -4,7 +4,7 @@ import { FaSearch, FaPlus, FaStar } from "react-icons/fa";
 import DemoImage from "../assets/project.png";
 import DemoImage2 from "../assets/demo.png";
 import { Link } from "react-router-dom";
-
+ 
 const Projects = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterCategory, setFilterCategory] = useState("");
