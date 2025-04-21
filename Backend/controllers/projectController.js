@@ -58,4 +58,49 @@ exports.getProjects = async (req, res) => {
     }
 }
 
+exports.getAvailableProjects = async (req, res) => {
+  try {
+    const projects = await Project.find({ status: "Open" }).populate("companyId");
+
+    if (!projects || projects.length === 0) {
+      return res.status(404).json({ message: "No open projects found" });
+    }
+
+    res.status(200).json(projects);
+  } catch (error) {
+    console.error("Error fetching available projects:", error);
+    res.status(500).json({ message: "Failed to fetch available projects" });
+  }
+};
+
+exports.acceptProject = async (req, res) => {
+  try {
+    const { projectId } = req.params;
+    const freelancerId = req.user?._id || req.body.freelancerId; // Adjust based on your auth system
+
+    if (!freelancerId) {
+      return res.status(400).json({ message: "Freelancer ID is required" });
+    }
+
+    const project = await Project.findById(projectId);
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    if (project.status !== 'Open') {
+      return res.status(400).json({ message: "Project is already accepted or closed" });
+    }
+
+    project.status = "Accepted";
+    project.acceptedFreelancer = freelancerId;
+
+    await project.save();
+
+    res.status(200).json({ message: "Project accepted successfully", project });
+  } catch (error) {
+    console.error("Error accepting project:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+};
 

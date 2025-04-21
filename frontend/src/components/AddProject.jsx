@@ -26,7 +26,7 @@ const AddProject = () => {
       ...prev,
       [name]: files ? files[0] : value,
     }));
-  };
+  }; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();

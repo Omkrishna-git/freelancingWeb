@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+ 
 const projectSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String, required: true },
@@ -10,10 +10,10 @@ const projectSchema = new mongoose.Schema({
     type: String,
     enum: ['Through this platform', 'Independent of platform'],
     required: true
-  },
+  }, 
   references: {
     data: Buffer,
-    contentType: String,
+    contentType: String, 
     filename: String
   },
   agreement: {
@@ -28,7 +28,7 @@ const projectSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['Open', 'In Progress', 'Completed', 'Cancelled'],
+    enum: ['Open', 'Accepted'],
     default: 'Open'
   },
   companyId: {
@@ -39,6 +39,11 @@ const projectSchema = new mongoose.Schema({
   author: {
     name: { type: String, default: 'Unknown' },
     profileImage: { type: String, default: '' }
+  },
+  acceptedFreelancer: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Freelancer',
+    default: null
   },
   rating: { type: Number, default: 0 },
   price: { type: Number, default: 0 } // optional field if cost isn't used in price display

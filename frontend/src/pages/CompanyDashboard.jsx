@@ -132,7 +132,7 @@ const CompanyDashboard = () => {
             ))}
           </motion.div>
         </div>
-
+ 
         {/* Jobs */}
         <div className="mt-20 mb-20">
           <h2 className="text-3xl text-center font-semibold mb-20">Jobs</h2>
@@ -165,6 +165,11 @@ const CompanyDashboard = () => {
           </div>
         </div>
 
+        <div className="mt-30">
+          <h2 className="text-3xl text-center font-semibold mb-15">My projects Updates</h2>
+          
+        </div>
+
         {/* Freelancer Connect */}
         <div className="mt-30">
           <h2 className="text-3xl text-center font-semibold mb-15">
@@ -180,7 +185,7 @@ const CompanyDashboard = () => {
               <button className="bg-green-600 text-white px-5 py-2 rounded-xl">
                 View Blogs
               </button>
-            </div>
+            </div> 
             <div className="bg-green-50 p-6 rounded shadow text-center hover:-translate-y-1 transition-transform duration-200">
               <FaUsers className="mx-auto w-10 h-10 mb-3 text-green-600" />
               <p className="font-semibold mb-1">Connect with Freelancers</p>
