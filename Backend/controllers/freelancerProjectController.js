@@ -4,7 +4,13 @@ const FreelancerProject = require("../models/FreelancerProject");
 exports.createProject = async (req, res) => {
   try {
     const { file } = req;
-    const imageUrl = file ? `/uploads/${file.filename}` : null;
+
+    // Ensure image was uploaded
+    if (!file) {
+      return res.status(400).json({ message: "Image is required." });
+    }
+
+    const imageUrl = `/uploads/${file.filename}`;
 
     const projectData = {
       ...req.body,
@@ -13,11 +19,13 @@ exports.createProject = async (req, res) => {
 
     const newProject = new FreelancerProject(projectData);
     const savedProject = await newProject.save();
+
     res.status(201).json(savedProject);
   } catch (error) {
     res.status(500).json({ message: "Error creating project", error });
   }
 };
+
 
 // Get all projects
 exports.getProjects = async (req, res) => {

@@ -86,7 +86,7 @@ const AdminFreelancers = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400"
           >
             <option value="">All Categories</option>
             <option value="Graphics & design guides">Graphics & Design Guides</option>
@@ -99,7 +99,7 @@ const AdminFreelancers = () => {
         <select
           value={sortOption}
           onChange={(e) => setSortOption(e.target.value)}
-          className='px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
+          className='px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400'
         >
           <option value='az'>Name (A-Z)</option>
           <option value='za'>Name (Z-A)</option>
@@ -132,7 +132,7 @@ const AdminFreelancers = () => {
 
       <button
         onClick={showMore}
-        className='mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400'
+        className='mt-4 bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400'
       >
         {visibleCount >= 10 ? 'Show Less' : 'Show More'}
       </button>

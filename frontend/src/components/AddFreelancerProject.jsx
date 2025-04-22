@@ -17,8 +17,8 @@ const AddProject = () => {
     budget: "",
     technologies: "",
     status: "open",
-    company: "",       // Optional: Fill in if needed
-    freelancer: "",    // Optional: Fill in if needed
+    company: "", // Optional: Fill in if needed
+    freelancer: "", // Optional: Fill in if needed
   });
 
   const handleChange = (e) => {
@@ -52,12 +52,17 @@ const AddProject = () => {
         freelancer: formData.freelancer || undefined,
       };
 
-      await axios.post("http://localhost:8000/api/freelancerprojects/createProject", payload, {
-        withCredentials: true,
-      });
-
+      await axios.post(
+        "http://localhost:8000/api/freelancerprojects/createProject",
+        payload,
+        {
+          withCredentials: true,
+        }
+      );
       navigate("/projects");
+      
     } catch (err) {
+      navigate("/projects");
       console.error("Failed to add project:", err);
     }
   };
@@ -148,7 +153,7 @@ const AddProject = () => {
               className="w-full border px-4 py-2 rounded"
             />
           </div>
-          <div>
+          {/* <div>
             <label className="block mb-1 font-semibold">Budget (Optional)</label>
             <input
               type="number"
@@ -156,7 +161,7 @@ const AddProject = () => {
               onChange={handleChange}
               className="w-full border px-4 py-2 rounded"
             />
-          </div>
+          </div> */}
         </div>
 
         <div>
@@ -172,7 +177,7 @@ const AddProject = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-4">
-          <div>
+          {/* <div>
             <label className="block mb-1 font-semibold">Rating</label>
             <input
               type="number"
@@ -183,8 +188,8 @@ const AddProject = () => {
               className="w-full border px-4 py-2 rounded"
               placeholder="0 - 5"
             />
-          </div>
-          <div>
+          </div> */}
+          {/* <div>
             <label className="block mb-1 font-semibold">Status</label>
             <select
               name="status"
@@ -196,7 +201,7 @@ const AddProject = () => {
               <option value="in progress">In Progress</option>
               <option value="completed">Completed</option>
             </select>
-          </div>
+          </div> */}
         </div>
 
         {/* Optional: Company & Freelancer IDs */}

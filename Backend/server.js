@@ -10,7 +10,7 @@ const freelancerRoutes = require("./routes/freelancerRoute");
 const projectRoutes = require("./routes/projectRoute");
 const freelancerProjectRoutes = require("./routes/freelancerProjectRoute");
 const app = express();
-
+ 
 // Middleware
 app.use(express.json({ limit: "10mb" })); // Increase limit for large files
 app.use(express.urlencoded({ extended: true }));
@@ -37,7 +37,7 @@ app.use('/uploads', express.static('uploads'));
 app.use("/api/projects", projectRoutes);
 app.use("/api/freelancerprojects", freelancerProjectRoutes);
 
-
+ 
 
 // Default Route
 app.get("/", (req, res) => {

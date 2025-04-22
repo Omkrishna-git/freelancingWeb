@@ -223,7 +223,7 @@ const CompanyDashboard = () => {
             {freelancers.map((freelancer, index) => (
               <div
                 key={index}
-                className="bg-green-100 p-6 rounded-lg shadow-md text-center"
+                className="bg-green-50 p-6 rounded-lg shadow-md text-center"
               >
                 <img
                   src={freelancer.img}
@@ -243,7 +243,7 @@ const CompanyDashboard = () => {
                     {freelancer.expertise.map((skill, idx) => (
                       <span
                         key={idx}
-                        className="bg-[#aec6bb] text-[#215f40] text-sm px-3 py-1 rounded-full"
+                        className="bg-[#c9f2b7] text-[#0d3721] text-sm px-3 py-1 rounded-full"
                       >
                         {skill}
                       </span>
@@ -259,9 +259,11 @@ const CompanyDashboard = () => {
                     {freelancer.company}
                   </p>
                 </div>
+                <Link to={"https://discord.gg/gzdc8aQt"}>
                 <button className="mt-4 bg-green-600 hover:bg-green-700 text-white px-8 py-2 rounded-full shadow-md transition duration-200">
                   Connect with Discord
                 </button>
+                </Link>
               </div>
             ))}
           </div>

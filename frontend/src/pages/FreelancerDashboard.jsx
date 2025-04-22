@@ -4,11 +4,35 @@ import "chart.js/auto";
 import axios from "axios";
 
 const FreelancerDetails = () => {
+  const [acceptedProjects, setAcceptedProjects] = useState([]);
+  const [availableProjects, setAvailableProjects] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/api/projects/available").then((res) => {
+      const data = Array.isArray(res.data) ? res.data : res.data.projects;
+      setAvailableProjects(data || []);
+    });
+
+    axios
+      .get("http://localhost:8000/api/freelancerprojects/accepted", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
+      .then((res) => {
+        setAcceptedProjects(res.data);
+      });
+  }, []);
+
   return (
     <div className="max-w-7xl w-full mx-auto p-6">
       <DetailsSection />
-      <AcceptedProjects />
-      <AvailableProjects />
+      <AcceptedProjects projects={acceptedProjects} />
+      <AvailableProjects
+        projects={availableProjects}
+        setProjects={setAvailableProjects}
+        setAcceptedProjects={setAcceptedProjects}
+      />
     </div>
   );
 };
@@ -47,33 +71,19 @@ const DetailsSection = () => {
   );
 };
 
-const AcceptedProjects = () => {
-  const [acceptedProjects, setAcceptedProjects] = useState([]);
-
-  useEffect(() => {
-    // Fetch accepted projects from API
-    axios
-      .get("http://localhost:8000/api/freelancerprojects/accepted")
-      .then((res) => {
-        setAcceptedProjects(res.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching accepted projects:", err);
-      });
-  }, []);
-
+const AcceptedProjects = ({ projects }) => {
   return (
     <div className="mt-10 px-4">
       <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
         Accepted Projects
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {acceptedProjects.length === 0 ? (
+        {projects.length === 0 ? (
           <p className="text-center col-span-full text-gray-500">
             No accepted projects found.
           </p>
         ) : (
-          acceptedProjects.map((project) => (
+          projects.map((project) => (
             <div
               key={project._id}
               className="bg-green-100 rounded-2xl shadow-md p-6 flex flex-col items-center text-center"
@@ -107,42 +117,37 @@ const AcceptedProjects = () => {
   );
 };
 
-const AvailableProjects = () => {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/projects/available")
-      .then((res) => {
-        const data = res.data;
-        if (Array.isArray(data)) {
-          setProjects(data);
-        } else if (Array.isArray(data.projects)) {
-          setProjects(data.projects);
-        } else {
-          console.warn("Unexpected response format:", data);
-          setProjects([]);
-        }
-      })
-      .catch((err) => {
-        console.error("Error fetching projects:", err);
-        setProjects([]);
-      })
-      .finally(() => setLoading(false));
-  }, []);
+const AvailableProjects = ({ projects, setProjects, setAcceptedProjects }) => {
+  const [loading, setLoading] = useState(false);
 
   const handleAccept = (projectId) => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("Please log in to accept projects.");
+      return;
+    }
+
+    const project = projects.find((p) => p._id === projectId);
+
     axios
-      .put(`http://localhost:8000/api/projects/accept/${projectId}`)
+      .put(
+        `http://localhost:8000/api/projects/accept/${projectId}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      )
       .then((res) => {
-        // After accepting, update the available projects list
-        setProjects(projects.filter((project) => project._id !== projectId));
-        // Optionally, you can refresh the list of accepted projects here
+        setProjects((prev) => prev.filter((p) => p._id !== projectId));
+        setAcceptedProjects((prev) => [...prev, project]);
         console.log("Project accepted:", res.data);
       })
       .catch((err) => {
         console.error("Error accepting project:", err);
+        alert("Failed to accept project. Make sure you are authenticated.");
       });
   };
 

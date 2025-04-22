@@ -27,7 +27,7 @@ const companies = [
   {
     companyName: 'Microsoft',
     category: 'Software',
-    services: ['Cloud Computing', 'Productivity Software', 'AI'],
+    services: ['Cloud Computing', 'Productivity Software', 'AI','Battery Storage',],
     contact: 'contact@microsoft.com',
     img: DemoImage,
   },
@@ -36,7 +36,7 @@ const companies = [
     category: 'Automotive',
     services: ['Electric Vehicles', 'Battery Storage', 'Autonomous Driving'],
     contact: 'contact@tesla.com',
-    img: DemoImage,
+    // img: DemoImage,
   },
 ];
 
@@ -77,7 +77,7 @@ const AdminCompanies = () => {
         <select
           value={filterCategory}
           onChange={(e) => setFilterCategory(e.target.value)}
-          className='px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
+          className='px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 mt-4 sm:mt-0'
         >
           <option value=''>All Categories</option>
           <option value='Technology'>Technology</option>
@@ -90,7 +90,7 @@ const AdminCompanies = () => {
         <select
           value={sortOption}
           onChange={(e) => setSortOption(e.target.value)}
-          className='px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400'
+          className='px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400'
         >
           <option value='az'>Company Name (A-Z)</option>
           <option value='za'>Company Name (Z-A)</option>
@@ -100,7 +100,7 @@ const AdminCompanies = () => {
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-y-auto max-h-96 px-4'>
         {filteredCompanies.map((company, index) => (
           <div key={index} className='bg-green-100 p-4 rounded-lg shadow-md text-center'>
-            <img src={company.img} alt={company.companyName} className='w-24 h-24 rounded-full mx-auto' />
+            {/* <img src={company.img} alt={company.companyName} className='w-24 h-24 rounded-full mx-auto' /> */}
             <h3 className='mt-2 text-lg font-semibold'>{company.companyName}</h3>
             <p className='text-sm text-gray-600'>{company.category}</p>
             <div className='mt-2'>
@@ -121,7 +121,7 @@ const AdminCompanies = () => {
         ))}
       </div>
 
-      <button onClick={showMore} className='px-4 py-2 mt-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
+      <button onClick={showMore} className='px-4 py-2 mt-2 bg-green-500 text-white rounded hover:bg-green-600'>
         {visibleCount >= 10 ? 'Show Less' : 'Show More'}
       </button>
     </div>

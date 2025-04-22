@@ -11,7 +11,7 @@ const sampleChartData = [
   { month: 'Apr', payments: 8000 },
   { month: 'May', payments: 9000 },
 ];
-
+ 
 const AdminHome = () => {
   return (
     <main className='flex-1 p-8 overflow-y-auto'>

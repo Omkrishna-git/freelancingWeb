@@ -76,7 +76,7 @@ exports.getAvailableProjects = async (req, res) => {
 exports.acceptProject = async (req, res) => {
   try {
     const { projectId } = req.params;
-    const freelancerId = req.user?._id || req.body.freelancerId; // Adjust based on your auth system
+    const freelancerId = req.user?._id || req.body.freelancerId; // from auth or request body
 
     if (!freelancerId) {
       return res.status(400).json({ message: "Freelancer ID is required" });
@@ -88,8 +88,17 @@ exports.acceptProject = async (req, res) => {
       return res.status(404).json({ message: "Project not found" });
     }
 
-    if (project.status !== 'Open') {
-      return res.status(400).json({ message: "Project is already accepted or closed" });
+    if (project.status !== "Open") {
+      return res
+        .status(400)
+        .json({ message: "Project is already accepted or closed" });
+    }
+
+    // Optional: Check if already assigned to a freelancer
+    if (project.acceptedFreelancer) {
+      return res
+        .status(400)
+        .json({ message: "Project already assigned to a freelancer" });
     }
 
     project.status = "Accepted";
@@ -97,10 +106,14 @@ exports.acceptProject = async (req, res) => {
 
     await project.save();
 
-    res.status(200).json({ message: "Project accepted successfully", project });
+    return res
+      .status(200)
+      .json({ message: "Project accepted successfully", project });
   } catch (error) {
     console.error("Error accepting project:", error);
-    res.status(500).json({ message: "Server error", error: error.message });
+    return res
+      .status(500)
+      .json({ message: "Server error", error: error.message });
   }
 };
 

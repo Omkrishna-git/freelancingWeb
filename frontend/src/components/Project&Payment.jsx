@@ -97,7 +97,7 @@ const ProjectsAndPayments = () => {
       </table>
 
       <button onClick={() => setVisibleCount(visibleCount === 5 ? 10 : 5)}
-        className='px-4 py-2 mt-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
+        className='bg-gradient-to-r from-green-400 to-green-500 text-white font-semibold px-6 py-2 rounded-xl shadow-md hover:from-green-500 hover:to-green-600 hover:scale-105 transition duration-300 ease-in-out mt-10'>
         {visibleCount === 5 ? 'Show More' : 'Show Less'}
       </button>
     </div>

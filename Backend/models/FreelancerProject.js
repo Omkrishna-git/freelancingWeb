@@ -9,10 +9,10 @@ const FreelancerProjectSchema = new mongoose.Schema(
       name: { type: String, required: true },
       profileImage: { type: String },
     },
-    rating: { type: Number, default: 0, min: 0, max: 5 },
+    // rating: { type: Number, default: 0, min: 0, max: 5 },
     price: { type: Number, required: true },
     imageUrl: { type: String, required: true },
-    budget: { type: Number },
+    // budget: { type: Number },
     technologies: [{ type: String }],
     company: {
       type: mongoose.Schema.Types.ObjectId,
@@ -22,11 +22,11 @@ const FreelancerProjectSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Freelancer",
     },
-    status: {
-      type: String,
-      enum: ["open", "in progress", "completed"],
-      default: "open",
-    },
+    // status: {
+    //   type: String,
+    //   enum: ["open", "in progress", "completed"],
+    //   default: "open",
+    // },
   },
   { timestamps: true }
 );
