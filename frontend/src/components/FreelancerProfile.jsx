@@ -22,7 +22,7 @@ const ProfileWindow = ({ isOpen, onClose }) => {
         .get(`http://localhost:8000/api/freelancers/${userId}`) // change here if your backend uses /freelancers/user/${userId}
         .then((res) => {
           const data = res.data;
-          setName(data.fullName ||"John")
+          setName(data.fullName ||"")
           setAbout(data.about || "");
           setEducation(data.education || []);
           setSkills(data.skills || []);

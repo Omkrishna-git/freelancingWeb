@@ -26,7 +26,8 @@ import AddProject from "./components/AddProject"; // Adjust the import path as n
 import AddFreelancerProject from "./components/AddFreelancerProject";
 import CompanyDashboard from './pages/CompanyDashboard'; // Adjust the import path as necessary
 import "./App.css";
-import Features from "./pages/fretures";
+import Features from "./pages/features";
+import DepositPage from "./pages/DepositePage"; // Adjust the import path as necessary
 
 function App() {
 
@@ -55,6 +56,8 @@ function App() {
             <Route path="/company" element={<CompanyDashboard />} />
             <Route path="/add-project" element={<AddProject />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/company/deposit/:projectId" element={<DepositPage />} />
+
           </Routes>
         <Footer />
       </Router>

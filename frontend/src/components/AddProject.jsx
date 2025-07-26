@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 const AddProject = () => {
-  const navigate = useNavigate();
   const userId = localStorage.getItem("userId");
   const token = localStorage.getItem("token");
 
@@ -19,7 +17,7 @@ const AddProject = () => {
     status: "Open",
     companyId: userId,
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData((prev) => ({

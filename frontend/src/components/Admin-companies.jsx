@@ -1,60 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
-import DemoImage from '../assets/demo.png';
-
-const companies = [
-  {
-    companyName: 'Google',
-    category: 'Technology',
-    services: ['Cloud Computing', 'AI Solutions', 'Cybersecurity'],
-    contact: 'contact@google.com',
-    img: DemoImage,
-  },
-  {
-    companyName: 'Shopify',
-    category: 'E-commerce',
-    services: ['Web Development', 'Payment Solutions', 'Marketing'],
-    contact: 'contact@shopify.com',
-    img: DemoImage,
-  },
-  {
-    companyName: 'ExxonMobil',
-    category: 'Energy',
-    services: ['Oil & Gas', 'Renewable Energy', 'Sustainability'],
-    contact: 'contact@exxonmobil.com',
-    img: DemoImage,
-  },
-  {
-    companyName: 'Microsoft',
-    category: 'Software',
-    services: ['Cloud Computing', 'Productivity Software', 'AI','Battery Storage',],
-    contact: 'contact@microsoft.com',
-    img: DemoImage,
-  },
-  {
-    companyName: 'Tesla',
-    category: 'Automotive',
-    services: ['Electric Vehicles', 'Battery Storage', 'Autonomous Driving'],
-    contact: 'contact@tesla.com',
-    // img: DemoImage,
-  },
-];
 
 const AdminCompanies = () => {
+  const [companies, setCompanies] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterCategory, setFilterCategory] = useState('');
   const [sortOption, setSortOption] = useState('az');
   const [visibleCount, setVisibleCount] = useState(4);
 
+  useEffect(() => {
+    fetch('http://localhost:8000/api/companies/')
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data)) setCompanies(data);
+        else setCompanies([]);
+      })
+      .catch(() => setCompanies([]));
+  }, []);
+
   const filteredCompanies = companies
     .filter((company) =>
-      company.companyName.toLowerCase().includes(searchTerm.toLowerCase())
+      company.organization?.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .filter((company) => (filterCategory ? company.category === filterCategory : true))
     .sort((a, b) =>
       sortOption === 'az'
-        ? a.companyName.localeCompare(b.companyName)
-        : b.companyName.localeCompare(a.companyName)
+        ? a.organization.localeCompare(b.organization)
+        : b.organization.localeCompare(a.organization)
     )
     .slice(0, visibleCount);
 
@@ -99,23 +71,19 @@ const AdminCompanies = () => {
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-y-auto max-h-96 px-4'>
         {filteredCompanies.map((company, index) => (
-          <div key={index} className='bg-green-100 p-4 rounded-lg shadow-md text-center'>
-            {/* <img src={company.img} alt={company.companyName} className='w-24 h-24 rounded-full mx-auto' /> */}
-            <h3 className='mt-2 text-lg font-semibold'>{company.companyName}</h3>
-            <p className='text-sm text-gray-600'>{company.category}</p>
-            <div className='mt-2'>
-              <h4 className='text-sm font-semibold text-gray-700'>Services</h4>
-              <div className='flex flex-wrap justify-center gap-2 mt-1'>
-                {company.services.map((service, idx) => (
-                  <span key={idx} className='bg-gray-200 text-sm px-2 py-1 rounded-full'>
-                    {service}
-                  </span>
-                ))}
-              </div>
-            </div>
+          <div key={company._id || index} className='bg-green-100 p-4 rounded-lg shadow-md text-center'>
+            {company.logo && (
+              <img src={company.logo} alt={company.organization} className='w-24 h-24 rounded-full mx-auto' />
+            )}
+            <h3 className='mt-2 text-lg font-semibold'>{company.organization}</h3>
+            <p className='text-sm text-gray-600'>{company.category || 'N/A'}</p>
             <div className='mt-2'>
               <h4 className='text-sm font-semibold text-gray-700'>Contact</h4>
               <p className='text-gray-900 font-semibold'>{company.contact}</p>
+            </div>
+            <div className='mt-2'>
+              <h4 className='text-sm font-semibold text-gray-700'>Address</h4>
+              <p className='text-gray-900 font-semibold'>{company.address}</p>
             </div>
           </div>
         ))}
@@ -128,4 +96,4 @@ const AdminCompanies = () => {
   );
 };
 
-export default AdminCompanies;
+export default AdminCompanies

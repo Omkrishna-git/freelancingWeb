@@ -3,6 +3,7 @@ import AdminHome from '../components/Admin-Home.jsx';
 import ProjectsAndPayments from '../components/Project&Payment.jsx';
 import AdminFreelancers from '../components/Admin-Freelancer.jsx';
 import AdminCompanies from '../components/Admin-companies.jsx';
+import AdminDisputes from "../components/Admin-Disputes.jsx";
 import { FaBars, FaHome, FaMoneyCheckAlt, FaUserTie, FaBuilding, FaChartBar } from 'react-icons/fa';
 
 const AdminDashboard = () => {
@@ -81,6 +82,9 @@ const AdminDashboard = () => {
         <section id='companies' className='mt-8'>
           <h2 className='text-2xl font-bold '>Companies</h2>
           <AdminCompanies />
+        </section>
+        <section id="disputes">
+          <AdminDisputes />
         </section>
       </main>
     </div>

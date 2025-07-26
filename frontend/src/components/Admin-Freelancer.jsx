@@ -1,67 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaSearch } from 'react-icons/fa';
 import DemoImage from '../assets/demo.png';
 
-const freelancers = [
-  {
-    name: 'Gabriel Courtemanche',
-    title: 'SEO and digital marketing Expert. Google Certified PPC Consultant',
-    expertise: ['Node JS', 'React', 'MongoDB', 'Express', 'JavaScript'],
-    company: 'Google',
-    img: DemoImage,
-  },
-  {
-    name: 'Justin Michela',
-    title: 'Full Stack Developer | Web & Mobile',
-    expertise: ['React', 'Vue', 'Python', 'Django', 'Flask'],
-    company: 'Shopify',
-    img: DemoImage,
-  },
-  {
-    name: 'Emma Stone',
-    title: 'UI/UX Designer & Illustrator',
-    expertise: ['Figma', 'Sketch', 'Adobe XD', 'Photoshop', 'Illustrator'],
-    company: 'ExxonMobil',
-    img: DemoImage,
-  },
-  {
-    name: 'David Miller',
-    title: 'Data Scientist & AI Enthusiast',
-    expertise: ['Python', 'TensorFlow', 'Keras', 'Pandas', 'NumPy'],
-    company: 'Google',
-    img: DemoImage,
-  },
-  {
-    name: 'Sophia Brown',
-    title: 'Backend Developer | API Specialist',
-    expertise: ['Node JS', 'Express', 'Java', 'Spring Boot', 'PostgreSQL'],
-    company: 'Shopify',
-    img: DemoImage,
-  },
-  {
-    name: 'Alex Johnson',
-    title: 'DevOps Engineer & Cloud Specialist',
-    expertise: ['AWS', 'Azure', 'Docker', 'Kubernetes', 'CI/CD'],
-    company: 'ExxonMobil',
-    img: DemoImage,
-  },
-];
+
 
 const AdminFreelancers = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
   const [sortOption, setSortOption] = useState('az');
   const [visibleCount, setVisibleCount] = useState(4);
+  const [freelancers, setFreelancers] = useState([]);
+
+    useEffect(() => {
+      fetch(`${import.meta.env.VITE_API_URL}/freelancers/getFreelancers`)
+        .then(res => res.json())
+        .then(data => {
+          if (Array.isArray(data)) setFreelancers(data);
+          else setFreelancers([]);
+        })
+        .catch(() => setFreelancers([]));
+    }, []);
 
   const filteredFreelancer = freelancers
     .filter((freelancer) =>
-      freelancer.name.toLowerCase().includes(searchTerm.toLowerCase())
+      freelancer.fullName
+        ? freelancer.fullName.toLowerCase().includes(searchTerm.toLowerCase())
+        : false
     )
     .filter((freelancer) => (filterStatus ? freelancer.company === filterStatus : true))
     .sort((a, b) =>
       sortOption === 'az'
-        ? a.name.localeCompare(b.name)
-        : b.name.localeCompare(a.name)
+        ? (a.fullName || '').localeCompare(b.fullName || '')
+        : (b.fullName || '').localeCompare(a.fullName || '')
     )
     .slice(0, visibleCount);
 
@@ -109,13 +79,13 @@ const AdminFreelancers = () => {
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-y-auto max-h-96 px-4'>
         {filteredFreelancer.map((freelancer, index) => (
           <div key={index} className='bg-green-100 p-4 rounded-lg shadow-md text-center'>
-            <img src={freelancer.img} alt={freelancer.name} className='w-24 h-24 rounded-full mx-auto' />
-            <h3 className='mt-2 text-lg font-semibold'>{freelancer.name}</h3>
+            <img src={freelancer.profileImage || DemoImage} alt={freelancer.fullName} className='w-24 h-24 rounded-full mx-auto' />
+            <h3 className='mt-2 text-lg font-semibold'>{freelancer.fullName}</h3>
             <p className='text-sm text-gray-600'>{freelancer.title}</p>
             <div className='mt-2'>
               <h4 className='text-sm font-semibold text-gray-700'>Expertise</h4>
               <div className='flex flex-wrap justify-center gap-2 mt-1'>
-                {freelancer.expertise.map((skill, idx) => (
+                {(freelancer.skills || []).map((skill, idx) => (
                   <span key={idx} className='bg-gray-200 text-sm px-2 py-1 rounded-full'>
                     {skill}
                   </span>
@@ -123,8 +93,12 @@ const AdminFreelancers = () => {
               </div>
             </div>
             <div className='mt-2'>
-              <h4 className='text-sm font-semibold text-gray-700'>Previously at</h4>
-              <p className='text-gray-900 font-semibold'>{freelancer.company}</p>
+              <h4 className='text-sm font-semibold text-gray-700'>Languages</h4>
+              <p className='text-gray-900 font-semibold'>{(freelancer.languages || []).join(", ")}</p>
+            </div>
+            <div className='mt-2'>
+              <h4 className='text-sm font-semibold text-gray-700'>Categories</h4>
+              <p className='text-gray-900 font-semibold'>{(freelancer.projectCategories || []).join(", ")}</p>
             </div>
           </div>
         ))}

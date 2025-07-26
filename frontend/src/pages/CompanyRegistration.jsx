@@ -74,7 +74,7 @@ const CompanyRegistration = () => {
       const result = await response.json();
       if (response.ok) {
         alert("Company registered successfully!");
-        navigate("/login");
+        navigate("/loginPage");
       } else {
         alert("Error: " + result.message);
       }

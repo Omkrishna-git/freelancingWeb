@@ -23,7 +23,9 @@ const CompanyProfile = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (companyId) {
       axios
-        .get(`http://localhost:8000/api/companies/${companyId}`)
+        .get(`http://localhost:8000/api/companies/profile`,
+          { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+        )
         .then((res) => setCompany(res.data))
         .catch((err) => console.error("Error fetching company data", err));
     }
@@ -31,7 +33,9 @@ const CompanyProfile = ({ isOpen, onClose }) => {
 
   const updateCompany = async (updateData) => {
     try {
-      await axios.put(`http://localhost:8000/api/companies/${companyId}`, updateData);
+      await axios.put(`http://localhost:8000/api/companies/update`, updateData,
+        { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } }
+      );
     } catch (err) {
       console.error("Update failed:", err);
     }
@@ -68,7 +72,7 @@ const CompanyProfile = ({ isOpen, onClose }) => {
   
     try {
       const res = await axios.put(
-        `http://localhost:8000/api/companies/upload/logo/${companyId}`,
+        `http://localhost:8000/api/companies/upload/logo`,
         formData
       );
       setCompany((prev) => ({ ...prev, logo: res.data.logo }));
