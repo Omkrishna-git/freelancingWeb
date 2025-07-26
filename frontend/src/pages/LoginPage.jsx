@@ -17,7 +17,7 @@ const LoginPage = () => {
 
   const handleCreateAccount = () => {
     if (!selectedRole) {
-      toast.success("Please select a role first.");  // Success toast in green
+      toast.success("Please select a role first.");  
       return;
     }
 

@@ -9,7 +9,7 @@ const FreelancerProjectSchema = new mongoose.Schema(
       name: { type: String, required: true },
       profileImage: { type: String },
     },
-    // rating: { type: Number, default: 0, min: 0, max: 5 },
+    rating: { type: Number, default: 0, min: 0, max: 5 },
     price: { type: Number, required: true },
     imageUrl: { type: String, required: true },
     // budget: { type: Number },
@@ -27,6 +27,8 @@ const FreelancerProjectSchema = new mongoose.Schema(
     //   enum: ["open", "in progress", "completed"],
     //   default: "open",
     // },
+    location: {type:String}, 
+
   },
   { timestamps: true }
 );

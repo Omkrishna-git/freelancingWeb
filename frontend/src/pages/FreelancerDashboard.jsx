@@ -6,7 +6,7 @@ import axios from "axios";
 const FreelancerDetails = () => {
   const [acceptedProjects, setAcceptedProjects] = useState([]);
   const [availableProjects, setAvailableProjects] = useState([]);
-
+  
   useEffect(() => {
     axios.get("http://localhost:8000/api/projects/available").then((res) => {
       const data = Array.isArray(res.data) ? res.data : res.data.projects;
@@ -128,18 +128,21 @@ const AvailableProjects = ({ projects, setProjects, setAcceptedProjects }) => {
     }
 
     const project = projects.find((p) => p._id === projectId);
-
-    axios
-      .put(
-        `http://localhost:8000/api/projects/accept/${projectId}`,
-        {},
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      )
+    const userId = localStorage.getItem("userId");
+    if (!userId) {
+      alert("User ID not found. Please log in again.");
+      return;
+    }
+    axios.put(
+      `http://localhost:8000/api/projects/accept/${projectId}`,
+      { freelancerId: userId },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((res) => {
         setProjects((prev) => prev.filter((p) => p._id !== projectId));
         setAcceptedProjects((prev) => [...prev, project]);

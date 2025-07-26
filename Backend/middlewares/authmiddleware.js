@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 
-// Replace with your actual JWT secret
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret';
 
 const authenticateJWT = (req, res, next) => {
@@ -14,7 +13,7 @@ const authenticateJWT = (req, res, next) => {
 
   try {
     const decoded = jwt.verify(token, JWT_SECRET);
-    req.user = decoded; // Make user data available in request
+    req.user = { id: decoded.id }; // Make user ID available in request
     next();
   } catch (err) {
     return res.status(401).json({ error: "Unauthorized: Invalid token" });

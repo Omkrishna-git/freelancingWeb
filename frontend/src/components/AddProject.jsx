@@ -36,10 +36,8 @@ const AddProject = () => {
   
       const formattedFormData = {
         ...formData,
-        status: "Open", // ensure capitalized
+        status: "Open", 
       };
-  
-      // Remove techStack for separate handling
       const techStackArray = formData.techStack.split(',').map(item => item.trim());
       delete formattedFormData.techStack;
   
@@ -49,7 +47,6 @@ const AddProject = () => {
         }
       } 
    
-      // Append each tech stack as separate value (handled as array by backend)
       techStackArray.forEach(tech => data.append('techStack', tech));
   
       const response = await fetch("http://localhost:8000/api/projects/createProject", {
@@ -90,7 +87,7 @@ const AddProject = () => {
       <textarea name="description" onChange={handleChange} required className="w-full border mb-4 px-4 py-2 rounded" />  
     </div>
     <div>
-       <label className="block mb-1 font-semibold">Project title</label>
+       <label className="block mb-1 font-semibold">Techstack required:</label>
       <input name="techStack" onChange={handleChange} placeholder="React, Express, ...." required className="w-full border mb-4 px-4 py-2 rounded" />
     </div>
     <div>

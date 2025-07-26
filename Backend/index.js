@@ -5,6 +5,8 @@ dotenv.config();
  
 //PORT 
 const PORT = process.env.PORT
+const cors = require('cors');
+app.use(cors());
 
 // server
 app.listen(PORT, () =>{

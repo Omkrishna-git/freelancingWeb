@@ -189,7 +189,7 @@ const CompanyDashboard = () => {
                 Post the job details to hire freelancers and get connected to
                 the talent.
               </p>
-              <Link to="/post-project">
+              <Link to="/add-project">
                 <button className="bg-green-600 text-white px-5 py-2 rounded-xl">
                   Post a job 
                 </button>

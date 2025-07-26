@@ -53,6 +53,8 @@ function App() {
             <Route path="/login/:role" element={<Login />} />
             <Route path="/add-freelancerproject" element={<AddFreelancerProject/>} /> 
             <Route path="/company" element={<CompanyDashboard />} />
+            <Route path="/add-project" element={<AddProject />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
           </Routes>
         <Footer />
       </Router>

@@ -1,5 +1,5 @@
-
 const Company = require("../models/Company");
+const Project = require("../models/Project");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -38,8 +38,6 @@ exports.registerCompany = async (req, res) => {
 };
 
 exports.loginCompany = async (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
   const { email, password } = req.body;
 
   // Check if fields are empty
@@ -64,7 +62,7 @@ exports.loginCompany = async (req, res) => {
     const token = jwt.sign(
       { id: company._id },
       process.env.JWT_SECRET ,
-      { expiresIn: "1h" }
+      { expiresIn: "7d" }
     );
     res.json({
       token,
@@ -81,8 +79,9 @@ exports.loginCompany = async (req, res) => {
 
 exports.getCompanyById = async (req, res) => {
   try {
+          const companyId = req.user.id;
 
-    const company = await Company.findById(req.params.id);
+          const company = await Company.findById(companyId);
 
     if (!company) return res.status(404).json({ message: "Company not found" });
 
@@ -100,7 +99,15 @@ exports.getCompanyById = async (req, res) => {
   }
 };
 
-// Update company profile
+exports.getAllCompanies = async (req, res) => {
+  try {
+    const companies = await Company.find();
+    res.json(Array.isArray(companies) ? companies : []);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
 exports.updateCompanyProfile = async (req, res) => {
   try {
     const updatedCompany = await Company.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -110,7 +117,6 @@ exports.updateCompanyProfile = async (req, res) => {
   }
 };
 
-// Upload logo and store as buffer
 exports.uploadCompanyLogo = async (req, res) => {
   try {
     const logoBuffer = req.file.buffer;
@@ -128,5 +134,83 @@ exports.uploadCompanyLogo = async (req, res) => {
     res.json(updatedObj);
   } catch (err) {
     res.status(500).json({ message: "Failed to upload logo", error: err.message });
+  }
+};
+
+exports.getAcceptedProjects = async (req, res) => {
+  try {
+    const projects = await Project.find({ companyId: req.params.id, status: 'Accepted' })
+      .populate('acceptedFreelancer', 'name email phone skills profileImage title')
+      .populate('author', 'name profileImage');
+    if (!projects || projects.length === 0) {
+      return res.status(404).json({ message: "No accepted projects found for this company" });
+    }
+    res.json(projects);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+};
+
+
+exports.getCompanyProjects = async (req, res) => {
+  try {
+    const companyId = req.user.id; // safer than req.query
+
+    const projects = await Project.find({ companyId })
+      .populate("acceptedFreelancer",  'name email phone skills profileImage title')
+      .populate("applicants.freelancerId", 'name email phone skills profileImage title');
+    if (!projects || projects.length === 0) {
+      return res.status(404).json({ message: "No projects found for this company" });
+    }
+    res.status(200).json(projects);
+  } catch (err) {
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+exports.getOngoingProjects = async (req, res) => {
+  try {
+    const companyId = req.user.id;
+
+    // Fetch all projects for this company that are either Accepted or In Progress
+    const projects = await Project.find({
+      companyId: companyId,
+      status: { $in: ["Accepted", "In Progress"] }
+    })
+      .populate("acceptedFreelancer", "name email skills phone profileImage title")
+      .select("title description cost deadline techStack modeOfWork status agreement references createdAt updatedAt");
+
+    res.status(200).json(projects);
+  } catch (err) {
+    console.error("Error fetching ongoing projects:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+};
+
+
+
+exports.getAllApplicantsForCompany = async (req, res) => {
+  try {
+    const companyId = req.user.id;
+
+    const projects = await Project.find({ companyId }).populate({
+      path: 'applicants.freelancerId',
+      select: 'name email phone skills profileImage title'
+    });
+
+    const allApplicants = projects.flatMap(project =>
+      project.applicants
+        .filter(applicant => applicant.status === 'applied')  // ✅ Only those who applied
+        .map(applicant => ({
+          ...applicant.toObject(),
+          projectId: project._id,
+          projectTitle: project.title
+        }))
+    );
+
+    res.status(200).json(allApplicants);
+  } catch (error) {
+    console.error("Error fetching applicants:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };

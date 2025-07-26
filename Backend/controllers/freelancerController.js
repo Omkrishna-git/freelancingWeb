@@ -1,6 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const Freelancer = require("../models/Freelancer");
+const Dispute = require("../models/DisputeModel");
 
 // Register Freelancer
 exports.registerFreelancer = async (req, res) => {
@@ -47,7 +48,7 @@ exports.loginFreelancer = async (req, res) => {
     const isMatch = await bcrypt.compare(password, freelancer.password);
     if (!isMatch) return res.status(400).json({ error: "Invalid credentials" });
 
-    const token = jwt.sign({ id: freelancer._id }, process.env.JWT_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ id: freelancer._id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 
     res.json({
       token,
@@ -60,6 +61,10 @@ exports.loginFreelancer = async (req, res) => {
   }
 };
 
+
+
+
+
 // Get Freelancer
 exports.getFreelancer = async (req, res) => {
   try {
@@ -68,6 +73,15 @@ exports.getFreelancer = async (req, res) => {
     res.status(200).json(freelancer);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getAllFreelancers = async (req, res) => {
+  try {
+    const freelancers = await Freelancer.find();
+    res.json(Array.isArray(freelancers) ? freelancers : []);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
   }
 };
 
@@ -96,3 +110,4 @@ exports.updateFreelancer = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+

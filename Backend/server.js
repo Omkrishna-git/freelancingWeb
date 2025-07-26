@@ -10,7 +10,9 @@ const freelancerRoutes = require("./routes/freelancerRoute");
 const projectRoutes = require("./routes/projectRoute");
 const freelancerProjectRoutes = require("./routes/freelancerProjectRoute");
 const app = express();
- 
+const recommendations = require("./routes/recommendations");
+const disputeRoutes = require("./routes/disputeRoute");
+const paymentRoute = require('./routes/EscrowRoute');
 // Middleware
 app.use(express.json({ limit: "10mb" })); // Increase limit for large files
 app.use(express.urlencoded({ extended: true }));
@@ -30,14 +32,15 @@ mongoose
 .catch((err) => console.error("❌ MongoDB Connection Error:", err.message));
 
 // API Routes
+
 app.use("/api/companies", companyRoutes);
 app.use("/api/freelancers", freelancerRoutes);
+app.use("/api/payments", paymentRoute);
 app.use("/api/blogs", require("./routes/blog"));
 app.use('/uploads', express.static('uploads'));
 app.use("/api/projects", projectRoutes);
-app.use("/api/freelancerprojects", freelancerProjectRoutes);
-
- 
+app.use("/api/recommendations", recommendations);
+app.use("/api/disputes", disputeRoutes);
 
 // Default Route
 app.get("/", (req, res) => {
